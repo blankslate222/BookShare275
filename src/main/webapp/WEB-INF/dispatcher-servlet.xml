@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<context:component-scan base-package="package edu.sjsu.cmpe275.bookshare.controller" />
+	<mvc:annotation-driven />
+	<aop:aspectj-autoproxy /> 
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="generalService" class="edu.sjsu.cmpe275.bookshare.service.GeneralService"></bean>
+	<bean id="bookService" class="edu.sjsu.cmpe275.bookshare.service.BookService"></bean>
+	<bean id="bidService" class="edu.sjsu.cmpe275.bookshare.service.BidService"></bean>
+	<bean id="orderService" class="edu.sjsu.cmpe275.bookshare.service.OrderService"></bean>
+	<bean id="userService" class="edu.sjsu.cmpe275.bookshare.service.UserService"></bean>
+	
+	<bean id="userDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl"></bean>
+	<bean id="bidDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.BidDaoImpl"></bean>
+	<bean id="bookDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl"></bean>
+	<bean id="listingDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl"></bean>
+	<bean id="orderDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.OrderDaoImpl"></bean>
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://cmpe282lab3.cuq1mfe3ymlp.us-west-1.rds.amazonaws.com/bookshare" />
+		<property name="username" value="nikhil" />
+		<property name="password" value="awsmysql" />
+	</bean>
+
+<mvc:resources mapping="/*" location="/*" />
+
+<mvc:annotation-driven />
+</beans>
