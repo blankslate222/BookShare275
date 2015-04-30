@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Share home
+Share home sweet
 </body>
 </html>

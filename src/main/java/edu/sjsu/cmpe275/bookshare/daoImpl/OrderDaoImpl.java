@@ -22,19 +22,19 @@ public class OrderDaoImpl implements OrderDao {
 		this.dataSource = dataSource;
 	}
 	
-	@Override
+	
 	public int insert(Order order) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public Order getOrderById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Order getOrderBySeller(String seller) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
