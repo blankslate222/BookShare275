@@ -1,32 +1,43 @@
 package edu.sjsu.cmpe275.bookshare.daoImpl;
 
-import edu.sjsu.cmpe275.bookshare.dao.BidDao;
-import edu.sjsu.cmpe275.bookshare.model.Bid;
+import java.sql.SQLException;
 
-public class ListingDaoImpl implements BidDao {
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import edu.sjsu.cmpe275.bookshare.dao.ListingDao;
+import edu.sjsu.cmpe275.bookshare.model.Listing;
+
+public class ListingDaoImpl implements ListingDao {
+
+	@Autowired
+	private DataSource dataSource;
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+	
 	@Override
-	public int insert() {
+	public int insert(Listing listing) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Bid getBidByListingId(int listingId) {
+	public Listing getListingById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Bid getBidByBidderEmail(String bidderEmail) {
+	public void removeListingById(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeBidsByListingId(int listingId) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }
