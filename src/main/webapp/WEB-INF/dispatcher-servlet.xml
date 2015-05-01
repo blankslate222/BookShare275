@@ -49,7 +49,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="password" value="awsmysql" />
 	</bean>
 
-<mvc:resources mapping="/*" location="/*" />
+<mvc:resources mapping="/**" location="/*" />
 
 <mvc:annotation-driven />
 </beans>
