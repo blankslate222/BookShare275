@@ -6,7 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.Convert;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,19 +67,106 @@ public class BidDaoImpl implements BidDao{
 		return (rowid);
 	}
 
-	public Bid getBidByListingId(int listingId) {
+	public List<Bid> getBidByListingId(int listingId) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from bidDetails where listingId=?";
 
-	public Bid getBidByBidderEmail(String bidderEmail) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removeBidsByListingId(int listingId) {
-		// TODO Auto-generated method stub
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, listingId);
 		
+		
+		data = ps.executeQuery(sql);
+		List<Bid> bidList = new ArrayList<Bid>();
+		Calendar c = Calendar.getInstance();
+		while(data.next())
+		{
+			Bid newBook = new Bid();
+			newBook.setBidderEmail(data.getString("bidderEmail"));
+			c.setTime(data.getDate("bidTime"));
+			newBook.setBidTime(c);
+			newBook.setId(data.getInt("id"));
+			newBook.setListingId(data.getInt("listingId"));
+			newBook.setOfferPrice(data.getString("offerPrice"));
+			bidList.add(newBook);
+		}
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (bidList);
+//		return null;
+	}
+
+	public Bid getBidByBidderEmail(String bidderEmail) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from bidDetails where bidderEmail=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, bidderEmail);
+		
+		
+		data = ps.executeQuery(sql);
+		Bid bidData = new Bid();
+		Calendar c = Calendar.getInstance();
+		bidData.setBidderEmail(data.getString("bidderEmail"));
+		c.setTime(data.getDate("bidTime"));
+		bidData.setBidTime(c);
+		bidData.setId(data.getInt("id"));
+		bidData.setListingId(data.getInt("listingId"));
+		bidData.setOfferPrice(data.getString("offerPrice"));
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (bidData);
+
+//		return null;
+	}
+
+	public void removeBidsByListingId(int listingId) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE from bidDetails where bidderEmail=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, listingId);
+		ps.executeUpdate(sql);
+		try {
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
