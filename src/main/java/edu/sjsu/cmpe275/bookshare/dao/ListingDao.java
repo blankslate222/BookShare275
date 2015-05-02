@@ -11,6 +11,9 @@ public interface ListingDao {
 
 	public Listing getListingById(int id) throws SQLException;
 	
+	//added the following because ISBN is unique and can be searched too(database doesnt have unique constraint on isbn-(anirudh)
+	public Listing getListingByIsbn(int id) throws SQLException;
+	
 	// after book is sold remove from database
 	public void removeListingById(int id) throws SQLException;
 

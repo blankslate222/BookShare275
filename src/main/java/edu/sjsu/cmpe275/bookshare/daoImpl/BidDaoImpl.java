@@ -79,7 +79,7 @@ public class BidDaoImpl implements BidDao{
 		ps.setInt(1, listingId);
 		
 		
-		data = ps.executeQuery(sql);
+		data = ps.executeQuery();
 		List<Bid> bidList = new ArrayList<Bid>();
 		Calendar c = Calendar.getInstance();
 		while(data.next())
@@ -123,7 +123,7 @@ public class BidDaoImpl implements BidDao{
 		ps.setString(1, bidderEmail);
 		
 		
-		data = ps.executeQuery(sql);
+		data = ps.executeQuery();
 		Bid bidData = new Bid();
 		Calendar c = Calendar.getInstance();
 		bidData.setBidderEmail(data.getString("bidderEmail"));

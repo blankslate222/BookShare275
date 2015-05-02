@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.bookshare.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import edu.sjsu.cmpe275.bookshare.model.Order;
 
@@ -11,6 +12,8 @@ public interface OrderDao {
 
 	public Order getOrderById(int id) throws SQLException;
 
-	public Order getOrderBySeller(String seller) throws SQLException;
+	public List<Order> getOrderBySeller(String seller) throws SQLException;
+	
+	public void deleteOrderById(int id) throws SQLException;
 
 }

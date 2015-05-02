@@ -1,12 +1,21 @@
 package edu.sjsu.cmpe275.bookshare.daoImpl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.sjsu.cmpe275.bookshare.dao.OrderDao;
+import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.Order;
 
 public class OrderDaoImpl implements OrderDao {
@@ -25,19 +34,143 @@ public class OrderDaoImpl implements OrderDao {
 	
 	public int insert(Order order) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int insert = 0;
+
+		String sql = "insert into orderBook"
+				+ "(buyer, seller, feedback, rating, orderDate) "
+				+ " values(?,?,?,?,?)";
+		
+		Calendar c = Calendar.getInstance();
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setInt(1, Integer.parseInt(order.getBuyer()));
+		ps.setInt(2, Integer.parseInt(order.getSeller()));
+		ps.setString(3, order.getFeedback());
+		ps.setInt(4, order.getRating());
+		ps.setTimestamp(5, new Timestamp(order.getOrderDate().getTimeInMillis()));
+		
+		insert = ps.executeUpdate();
+		ResultSet rs = ps.getGeneratedKeys();
+		int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}
+		try {
+			ps.close();
+			conn.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (rowid);
 	}
 
 	
 	public Order getOrderById(int id) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from book where id=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1,id);
+		
+		
+		data = ps.executeQuery();
+		Order newOrder = new Order();
+		Calendar c = Calendar.getInstance();
+		if(data.next())
+		{
+			newOrder.setBuyer(Integer.toString(data.getInt("buyer")));
+			newOrder.setSeller(Integer.toString(data.getInt("seller")));
+			newOrder.setFeedback(data.getString("feedback"));
+			newOrder.setRating(data.getInt("rating"));
+			c.setTime(data.getDate("orderDate"));
+			newOrder.setOrderDate(c);
+			
+		}
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return (newOrder);
+		
+		
 	}
 
 	
-	public Order getOrderBySeller(String seller) throws SQLException {
+	public List<Order> getOrderBySeller(String seller) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from book where seller=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1,seller);
+		
+		
+		data = ps.executeQuery();
+		List<Order> orderList = new ArrayList<Order>();
+		Calendar c = Calendar.getInstance();
+		while(data.next())
+		{
+			Order newOrder = new Order();
+			newOrder.setBuyer(Integer.toString(data.getInt("buyer")));
+			newOrder.setSeller(Integer.toString(data.getInt("seller")));
+			newOrder.setFeedback(data.getString("feedback"));
+			newOrder.setRating(data.getInt("rating"));
+			c.setTime(data.getDate("orderDate"));
+			newOrder.setOrderDate(c);
+			orderList.add(newOrder);
+			
+		}
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return (orderList);
+		
+		
+	}
+	
+	public void deleteOrderById(int id) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE from orderBook where id=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, id);
+		ps.executeUpdate();
+		
 	}
 
 }

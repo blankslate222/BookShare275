@@ -11,5 +11,9 @@ public interface UserDao {
 	public void createUser(User user) throws SQLException;
 
 	public User getUserByEmail(String email) throws SQLException;
+	// added getuserbyid and del-(anirudh)
+	public User getUserById(int id) throws SQLException;
+	
+	public void deleteUser(int id) throws SQLException;
 
 }
