@@ -8,17 +8,26 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.Criteria;
 
 import edu.sjsu.cmpe275.bookshare.dao.UserDao;
 import edu.sjsu.cmpe275.bookshare.model.Listing;
 import edu.sjsu.cmpe275.bookshare.model.User;
 
 public class UserDaoImpl implements UserDao {
+	
+	private SessionFactory sessionFactory;
 
-	@Autowired
+	
 	private DataSource dataSource;
-
+	@Autowired
+	public UserDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	public DataSource getDataSource() {
 		return dataSource;
 	}
@@ -164,5 +173,10 @@ public class UserDaoImpl implements UserDao {
 		
 		return;
 	}
-
+	
+	@Transactional
+    public void createUserhbm(User user){
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
+	}
+	
 }

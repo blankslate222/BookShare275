@@ -15,5 +15,7 @@ public interface UserDao {
 	public User getUserById(int id) throws SQLException;
 	
 	public void deleteUser(int id) throws SQLException;
-
+     
+	public void createUserhbm(User user);
+	
 }
