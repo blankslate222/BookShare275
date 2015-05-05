@@ -69,7 +69,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-<mvc:resources mapping="/**" location="/*" />
+<mvc:resources mapping="/**" location="/**" />
 
 <mvc:annotation-driven />
 </beans>
