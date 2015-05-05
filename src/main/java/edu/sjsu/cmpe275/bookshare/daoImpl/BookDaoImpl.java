@@ -38,8 +38,8 @@ public class BookDaoImpl implements BookDao {
 		int insert = 0;
 
 		String sql = "insert into book"
-				+ "(isbn,title,description,condition,price,author,status) "
-				+ "values(?,?,?,?,?,?,?);";
+				+ "(isbn,title,description,condition,price,author,status, user) "
+				+ "values(?,?,?,?,?,?,?,?)";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -52,7 +52,7 @@ public class BookDaoImpl implements BookDao {
 		ps.setString(5, book.getPrice());
 		ps.setString(6, book.getAuthor());
 		ps.setString(7, book.getStatus());
-		//ps.setInt(8, Integer.parseInt(book.getUser().toString()));
+		ps.setString(8, book.getUser());
 		
 		insert = ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
@@ -95,7 +95,7 @@ public class BookDaoImpl implements BookDao {
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
-			newBook.setUser(Integer.toString(data.getInt("user")));
+			newBook.setUser((data.getString("user")));
 		
 		/*int rowid = 0;
 		if (rs.next()) {
@@ -136,7 +136,7 @@ public class BookDaoImpl implements BookDao {
 		newBook.setPrice(data.getString("price"));
 		newBook.setAuthor(data.getString("author"));
 		newBook.setStatus(data.getString("status"));
-		newBook.setUser(Integer.toString(data.getInt("user")));
+		newBook.setUser((data.getString("user")));
 		bookList.add(newBook);
 		}
 		/*int rowid = 0;
@@ -180,7 +180,7 @@ public class BookDaoImpl implements BookDao {
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
-			newBook.setUser(Integer.toString(data.getInt("user")));
+			newBook.setUser((data.getString("user")));
 			bookList.add(newBook);
 		}
 		
@@ -225,7 +225,7 @@ public class BookDaoImpl implements BookDao {
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
-			newBook.setUser(Integer.toString(data.getInt("user")));
+			newBook.setUser((data.getString("user")));
 			bookList.add(newBook);
 		}
 		

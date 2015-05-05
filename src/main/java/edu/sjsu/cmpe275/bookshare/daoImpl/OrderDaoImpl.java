@@ -116,18 +116,25 @@ public class OrderDaoImpl implements OrderDao {
 		
 		
 	}
-
-	
 	public List<Order> getOrderBySeller(String seller) throws SQLException {
+		String sql = "select * from book where seller=?";
+		return getOrderByUser(seller, sql);		
+	}
+	
+	public List<Order> getOrderByBuyer(String buyer) throws SQLException {
+		String sql = "select * from book where buyer=?";
+		return getOrderByUser(buyer, sql);		
+	}
+	
+	private List<Order> getOrderByUser(String user, String sql) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-		String sql = "select * from book where seller=?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setString(1,seller);
+		ps.setString(1,user);
 		
 		
 		data = ps.executeQuery();

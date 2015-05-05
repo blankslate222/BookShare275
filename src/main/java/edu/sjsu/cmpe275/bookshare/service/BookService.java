@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl;
-import edu.sjsu.cmpe275.bookshare.daoImpl.OrderDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
-import edu.sjsu.cmpe275.bookshare.model.Order;
 
 @Service
 public class BookService {
