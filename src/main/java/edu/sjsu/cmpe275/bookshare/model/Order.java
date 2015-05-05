@@ -7,6 +7,8 @@ public class Order {
 	private int id;
 	private String buyer;
 	private String seller;
+	private String isbn;
+	private String price;
 	private String feedback;
 	private int rating;
 	private Calendar orderDate;
@@ -46,6 +48,18 @@ public class Order {
 	}
 	public void setOrderDate(Calendar orderDate) {
 		this.orderDate = orderDate;
+	}
+	public String getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	
 }

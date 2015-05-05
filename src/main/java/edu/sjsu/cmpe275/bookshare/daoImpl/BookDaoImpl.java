@@ -258,7 +258,36 @@ public class BookDaoImpl implements BookDao {
 		
 		
 		rowsAffected = ps.executeUpdate();
+		try {
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
+		return;
+		
+	}
+	
+	public void deleteBookByIsbn(String isbn) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rowsAffected =0;
+		String sql = "delete from book where isbn=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, isbn);
+		
+		
+		rowsAffected = ps.executeUpdate();
+		try {
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return;
 		

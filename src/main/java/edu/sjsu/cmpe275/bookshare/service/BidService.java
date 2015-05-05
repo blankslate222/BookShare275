@@ -19,4 +19,7 @@ public class BidService {
 		this.bidDaoImpl = bidDaoImpl;
 	}
 	
+	public void offerLowerPrice(String isbn) {
+
+	}	
 }

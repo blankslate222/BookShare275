@@ -141,5 +141,18 @@ public class ListingDaoImpl implements ListingDao {
 		ps.executeUpdate();
 		
 	}
+	
+	public void removeListingByIsbn(String isbn) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "DELETE from listingDetails where isbn=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, isbn);
+		ps.executeUpdate();
+		
+	}
 
 }

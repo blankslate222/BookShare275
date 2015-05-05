@@ -39,8 +39,8 @@ public class OrderDaoImpl implements OrderDao {
 		int insert = 0;
 
 		String sql = "insert into orderBook"
-				+ "(buyer, seller, feedback, rating, orderDate) "
-				+ " values(?,?,?,?,?)";
+				+ "(buyer, seller, feedback, rating, orderDate, bookIsbn, price) "
+				+ " values(?,?,?,?,?,?,?)";
 		
 		Calendar c = Calendar.getInstance();
 		conn = getDataSource().getConnection();
@@ -50,6 +50,8 @@ public class OrderDaoImpl implements OrderDao {
 		ps.setString(3, order.getFeedback());
 		ps.setInt(4, order.getRating());
 		ps.setTimestamp(5, new Timestamp(order.getOrderDate().getTimeInMillis()));
+		ps.setString(6,  order.getIsbn());
+		ps.setString(7,  order.getPrice());
 		
 		insert = ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
@@ -92,8 +94,9 @@ public class OrderDaoImpl implements OrderDao {
 			newOrder.setFeedback(data.getString("feedback"));
 			newOrder.setRating(data.getInt("rating"));
 			c.setTime(data.getDate("orderDate"));
-			newOrder.setOrderDate(c);
-			
+			newOrder.setIsbn(data.getString("bookIsbn"));
+			newOrder.setPrice(data.getString("price"));
+			newOrder.setOrderDate(c);			
 		}
 		
 		/*int rowid = 0;
@@ -139,6 +142,9 @@ public class OrderDaoImpl implements OrderDao {
 			newOrder.setRating(data.getInt("rating"));
 			c.setTime(data.getDate("orderDate"));
 			newOrder.setOrderDate(c);
+			newOrder.setIsbn(data.getString("bookIsbn"));
+			newOrder.setPrice(data.getString("price"));
+			
 			orderList.add(newOrder);
 			
 		}
