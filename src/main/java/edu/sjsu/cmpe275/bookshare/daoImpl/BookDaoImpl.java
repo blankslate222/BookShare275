@@ -71,7 +71,7 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	
-	public List<Book> getBookByIsbn(String isbn) throws SQLException {
+	public Book getBookByIsbn(String isbn) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -84,9 +84,7 @@ public class BookDaoImpl implements BookDao {
 		
 		
 		data = ps.executeQuery();
-		List<Book> BookList = new ArrayList<Book>();
-		while(data.next())
-		{
+	
 			Book newBook = new Book();
 			newBook.setIsbn(Integer.toString(data.getInt("isbn")));
 			newBook.setTitle(data.getString("title"));
@@ -96,8 +94,6 @@ public class BookDaoImpl implements BookDao {
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
 			newBook.setUser(Integer.toString(data.getInt("user")));
-			BookList.add(newBook);
-		}
 		
 		/*int rowid = 0;
 		if (rs.next()) {
@@ -112,23 +108,24 @@ public class BookDaoImpl implements BookDao {
 			e.printStackTrace();
 		}
 
-		return (BookList);
+		return newBook;
 	}
 
 	
-	public Book getBookByTitle(String title) throws SQLException {
+	public List<Book> getBookByTitle(String title) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-		String sql = "select * from book where title=?";
+		String sql = "select * from book where title like ?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, title);
-		
+		ps.setString(1, "%" + title + "%");
+		List<Book> bookList = new ArrayList<Book>();
 		
 		data = ps.executeQuery();
+		while(data.next()){
 		Book newBook = new Book();
 		newBook.setIsbn(Integer.toString(data.getInt("isbn")));
 		newBook.setTitle(data.getString("title"));
@@ -138,7 +135,8 @@ public class BookDaoImpl implements BookDao {
 		newBook.setAuthor(data.getString("author"));
 		newBook.setStatus(data.getString("status"));
 		newBook.setUser(Integer.toString(data.getInt("user")));
-		
+		bookList.add(newBook);
+		}
 		/*int rowid = 0;
 		if (rs.next()) {
 			System.out.println(rs.toString());
@@ -152,7 +150,7 @@ public class BookDaoImpl implements BookDao {
 			e.printStackTrace();
 		}
 
-		return (newBook);
+		return bookList;
 	}
 
 	
@@ -161,15 +159,15 @@ public class BookDaoImpl implements BookDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-		String sql = "select * from book where author=?";
+		String sql = "select * from book where author like ?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, author);
+		ps.setString(1,"%" + author + "%");
 		
 		
 		data = ps.executeQuery();
-		List<Book> BookList = new ArrayList<Book>();
+		List<Book> bookList = new ArrayList<Book>();
 		while(data.next())
 		{
 			Book newBook = new Book();
@@ -181,7 +179,7 @@ public class BookDaoImpl implements BookDao {
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
 			newBook.setUser(Integer.toString(data.getInt("user")));
-			BookList.add(newBook);
+			bookList.add(newBook);
 		}
 		
 		/*int rowid = 0;
@@ -197,7 +195,7 @@ public class BookDaoImpl implements BookDao {
 			e.printStackTrace();
 		}
 
-		return (BookList);
+		return bookList;
 	}
 
 	
@@ -214,7 +212,7 @@ public class BookDaoImpl implements BookDao {
 		
 		
 		data = ps.executeQuery();
-		List<Book> BookList = new ArrayList<Book>();
+		List<Book> bookList = new ArrayList<Book>();
 		while(data.next())
 		{
 			Book newBook = new Book();
@@ -226,7 +224,7 @@ public class BookDaoImpl implements BookDao {
 			newBook.setAuthor(data.getString("author"));
 			newBook.setStatus(data.getString("status"));
 			newBook.setUser(Integer.toString(data.getInt("user")));
-			BookList.add(newBook);
+			bookList.add(newBook);
 		}
 		
 		/*int rowid = 0;
@@ -242,7 +240,7 @@ public class BookDaoImpl implements BookDao {
 			e.printStackTrace();
 		}
 
-		return (BookList);
+		return bookList;
 	}
 	
 	public void deleteBookById(int id) throws SQLException {

@@ -10,10 +10,10 @@ public interface BookDao {
 	public int insert(Book book) throws SQLException;
 
 	// to provide search facility
-	public List<Book> getBookByIsbn(String isbn) throws SQLException;
+	public Book getBookByIsbn(String isbn) throws SQLException;
 
 	// to provide search facility
-	public Book getBookByTitle(String title) throws SQLException;
+	public List<Book> getBookByTitle(String title) throws SQLException;
 
 	// to provide search facility
 	public List<Book> getBookByAuthor(String author) throws SQLException;

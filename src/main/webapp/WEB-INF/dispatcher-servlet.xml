@@ -36,6 +36,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
 	<bean id="bidService" class="edu.sjsu.cmpe275.bookshare.service.BidService"></bean>
 	<bean id="orderService" class="edu.sjsu.cmpe275.bookshare.service.OrderService"></bean>
 	<bean id="userService" class="edu.sjsu.cmpe275.bookshare.service.UserService"></bean>
+	<bean id="searchService" class="edu.sjsu.cmpe275.bookshare.service.SearchService"></bean>
 	
 	<bean id="userDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl">
 	 <constructor-arg>
