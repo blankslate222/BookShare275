@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -19,6 +21,11 @@ import edu.sjsu.cmpe275.bookshare.model.User;
 
 public class UserDaoImpl implements UserDao {
 	
+	public UserDaoImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private SessionFactory sessionFactory;
 
 	
@@ -113,6 +120,51 @@ public class UserDaoImpl implements UserDao {
 		return (user);
 		
 	}
+	//added may5
+	public List<User> getAllUsers() throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from user";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		//ps.setInt(1, id);
+		
+		
+		data = ps.executeQuery();
+	
+		List <User> userList = new ArrayList<User>();
+		while(data.next())
+		{
+			User user=new User();
+			user.setId(data.getInt("id"));
+			user.setEmail(data.getString("email"));
+			//user.setPassword(data.getString("pasword"));
+			user.setFirstname(data.getString("firstname"));
+			user.setLastname(data.getString("lastname"));
+			user.setAddress(data.getString("address"));
+			userList.add(user);
+		}
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (userList);
+		
+	}
+	
 	public User getUserById(int id) throws SQLException {
 		
 		Connection conn = null;

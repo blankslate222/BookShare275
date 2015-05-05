@@ -28,4 +28,5 @@ public class UserController {
 		userDao.createUserhbm(user);
 		return new ModelAndView("redirect:/new");
 	}
+	
 }
