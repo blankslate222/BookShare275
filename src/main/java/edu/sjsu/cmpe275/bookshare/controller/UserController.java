@@ -17,7 +17,7 @@ public class UserController {
 	@Autowired
 	private UserDao userDao;
 	
-	@RequestMapping(value="/new")
+	@RequestMapping(value="/user/new")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView("UserForm");
 		model.addObject("user", new User());
