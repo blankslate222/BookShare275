@@ -51,28 +51,14 @@
 	<!-- start content -->
 	<div class="container">
 		
-	
-	
-	
-</div>
-	<!---->
-	
-	<form:form action="${pageContext.request.contextPath}/" method="post" modelAttribute="order" class="form-horizontal">
+<form:form action="${pageContext.request.contextPath}/update-feedback" method="post" modelAttribute="order" class="form-horizontal">
 <form:hidden path="id"/>
 <fieldset>
 
 <!-- Form Name -->
 <legend>Share Book</legend>
 
-
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="isbn"></label>  
-  <div class="col-md-5">
-  <form:input path="isbn" id="isbn" name="isbn" type="hidden" placeholder="" class="form-control input-md" required=""/>
-    
-  </div>
-</div>
 
 <!-- Select Basic -->
 <div class="form-group">
@@ -109,7 +95,6 @@
 
 </fieldset>
 </form:form>
-
-	
-
+</div>
+	<!---->
 </body></html>

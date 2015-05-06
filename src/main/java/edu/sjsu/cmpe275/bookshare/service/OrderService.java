@@ -46,7 +46,7 @@ public class OrderService {
 		this.listingDaoImpl = listingDaoImpl;
 	}
 
-	public Order createOrder(Book book, String buyer) {
+	private Order createOrder(Book book, String buyer) {
 		Order generatedOrder = null;
 		Order order = null;
 		try {
@@ -79,6 +79,15 @@ public class OrderService {
 				e.printStackTrace();
 			}
 			return generatedOrder;
+		}
+		
+		public void updateOrder(Order order) {
+			try {
+				orderDaoImpl.updateOrder(order);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 }

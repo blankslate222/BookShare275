@@ -71,15 +71,24 @@ public class TransactionsController {
 		//""+req.getSession().getAttribute("user")
 		Order order = orderService.bookShare(book.getIsbn(), "user1");
 		feedback.addObject("order", order);
+		//System.out.println("inserted order id in controller = "+ order.getId());
 		return feedback;
 	}
 	
 	@RequestMapping(value = "details/book/{id}",method = RequestMethod.GET)
 	public ModelAndView bookDetails(@PathVariable("id") int id, Model model) {
-		ModelAndView orderSummary = new ModelAndView("BookDetails");
+		ModelAndView orderSummary = new ModelAndView("BookDetail");
 		Book book = bookService.getBookById(id);
 		orderSummary.addObject("book", book );
 		return orderSummary;
+	}
+	
+	@RequestMapping(value = "update-feedback", method = RequestMethod.POST)
+	public String updateFeedback(@ModelAttribute("order") Order order, BindingResult result,
+			Model model) {
+		//System.out.println(order.getFeedback()+order.getId());
+		orderService.updateOrder(order);
+		return "redirect:/";
 	}
 
 }

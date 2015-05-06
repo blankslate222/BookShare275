@@ -30,8 +30,7 @@ public class OrderDaoImpl implements OrderDao {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-	
-	
+
 	public int insert(Order order) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -41,7 +40,7 @@ public class OrderDaoImpl implements OrderDao {
 		String sql = "insert into orderBook"
 				+ "(buyer, seller, feedback, rating, orderDate, bookIsbn, price) "
 				+ " values(?,?,?,?,?,?,?)";
-		
+
 		Calendar c = Calendar.getInstance();
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -49,15 +48,16 @@ public class OrderDaoImpl implements OrderDao {
 		ps.setString(2, (order.getSeller()));
 		ps.setString(3, order.getFeedback());
 		ps.setInt(4, order.getRating());
-		ps.setTimestamp(5, new Timestamp(order.getOrderDate().getTimeInMillis()));
-		ps.setString(6,  order.getIsbn());
-		ps.setString(7,  order.getPrice());
-		
+		ps.setTimestamp(5,
+				new Timestamp(order.getOrderDate().getTimeInMillis()));
+		ps.setString(6, order.getIsbn());
+		ps.setString(7, order.getPrice());
+
 		insert = ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
 		int rowid = 0;
 		if (rs.next()) {
-			System.out.println(rs.toString());
+			//System.out.println(rs.toString());
 			rowid = rs.getInt(1);
 		}
 		try {
@@ -67,11 +67,10 @@ public class OrderDaoImpl implements OrderDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+System.out.println("row id in order dao impl = "+rowid);
 		return (rowid);
 	}
 
-	
 	public Order getOrderById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -81,14 +80,13 @@ public class OrderDaoImpl implements OrderDao {
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setInt(1,id);
-		
-		
+		ps.setInt(1, id);
+
 		data = ps.executeQuery();
 		Order newOrder = new Order();
 		Calendar c = Calendar.getInstance();
-		if(data.next())
-		{
+		if (data.next()) {
+			newOrder.setId(data.getInt("id"));
 			newOrder.setBuyer((data.getString("buyer")));
 			newOrder.setSeller((data.getString("seller")));
 			newOrder.setFeedback(data.getString("feedback"));
@@ -96,14 +94,13 @@ public class OrderDaoImpl implements OrderDao {
 			c.setTime(data.getDate("orderDate"));
 			newOrder.setIsbn(data.getString("bookIsbn"));
 			newOrder.setPrice(data.getString("price"));
-			newOrder.setOrderDate(c);			
+			newOrder.setOrderDate(c);
 		}
-		
-		/*int rowid = 0;
-		if (rs.next()) {
-			System.out.println(rs.toString());
-			rowid = rs.getInt(1);
-		}*/
+
+		/*
+		 * int rowid = 0; if (rs.next()) { System.out.println(rs.toString());
+		 * rowid = rs.getInt(1); }
+		 */
 		try {
 			ps.close();
 			conn.close();
@@ -111,22 +108,23 @@ public class OrderDaoImpl implements OrderDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return (newOrder);
-		
-		
+
 	}
+
 	public List<Order> getOrderBySeller(String seller) throws SQLException {
 		String sql = "select * from book where seller=?";
-		return getOrderByUser(seller, sql);		
+		return getOrderByUser(seller, sql);
 	}
-	
+
 	public List<Order> getOrderByBuyer(String buyer) throws SQLException {
 		String sql = "select * from book where buyer=?";
-		return getOrderByUser(buyer, sql);		
+		return getOrderByUser(buyer, sql);
 	}
-	
-	private List<Order> getOrderByUser(String user, String sql) throws SQLException {
+
+	private List<Order> getOrderByUser(String user, String sql)
+			throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -134,15 +132,14 @@ public class OrderDaoImpl implements OrderDao {
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setString(1,user);
-		
-		
+		ps.setString(1, user);
+
 		data = ps.executeQuery();
 		List<Order> orderList = new ArrayList<Order>();
 		Calendar c = Calendar.getInstance();
-		while(data.next())
-		{
+		while (data.next()) {
 			Order newOrder = new Order();
+			newOrder.setId(data.getInt("id"));
 			newOrder.setBuyer((data.getString("buyer")));
 			newOrder.setSeller((data.getString("seller")));
 			newOrder.setFeedback(data.getString("feedback"));
@@ -151,16 +148,15 @@ public class OrderDaoImpl implements OrderDao {
 			newOrder.setOrderDate(c);
 			newOrder.setIsbn(data.getString("bookIsbn"));
 			newOrder.setPrice(data.getString("price"));
-			
+
 			orderList.add(newOrder);
-			
+
 		}
-		
-		/*int rowid = 0;
-		if (rs.next()) {
-			System.out.println(rs.toString());
-			rowid = rs.getInt(1);
-		}*/
+
+		/*
+		 * int rowid = 0; if (rs.next()) { System.out.println(rs.toString());
+		 * rowid = rs.getInt(1); }
+		 */
 		try {
 			ps.close();
 			conn.close();
@@ -168,12 +164,11 @@ public class OrderDaoImpl implements OrderDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return (orderList);
-		
-		
+
 	}
-	
+
 	public void deleteOrderById(int id) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -183,7 +178,32 @@ public class OrderDaoImpl implements OrderDao {
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, id);
 		ps.executeUpdate();
-		
+
 	}
 
+	public void updateOrder(Order order) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int insert = 0;
+
+		String sql = "update orderBook set "
+				+ "feedback = ?, rating = ? where id = ?";
+		Calendar c = Calendar.getInstance();
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, (order.getFeedback()));
+		ps.setInt(2, (order.getRating()));
+		ps.setInt(3, order.getId());
+	
+		insert = ps.executeUpdate();
+
+		try {
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
