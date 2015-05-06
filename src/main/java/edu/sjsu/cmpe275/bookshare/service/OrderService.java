@@ -81,17 +81,4 @@ public class OrderService {
 			return generatedOrder;
 		}
 
-		public Order fixedRatePurchase(String isbn, String buyer) {
-			Book bookToBeShared = null;
-			Order generatedOrder = null;
-			try {
-				bookToBeShared = getBookDaoImpl().getBookByIsbn(isbn);
-				getListingDaoImpl().removeListingByIsbn(isbn);
-				generatedOrder = createOrder(bookToBeShared, buyer);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return generatedOrder;
-		}
 }

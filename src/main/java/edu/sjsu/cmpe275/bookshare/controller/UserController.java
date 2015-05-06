@@ -16,7 +16,7 @@ import edu.sjsu.cmpe275.bookshare.model.User;
 @Controller
 public class UserController {
 	@Autowired
-	private UserDaoImpl userDaoImpl;
+	private UserDao userDao;
 	
 	@RequestMapping(value="/user/new")
 	public ModelAndView newUser() {
@@ -26,7 +26,7 @@ public class UserController {
 	}
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
-		userDaoImpl.createUserhbm(user);
+		userDao.createUserhbm(user);
 		return new ModelAndView("redirect:/new");
 	}
 	

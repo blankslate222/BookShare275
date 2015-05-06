@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
+import edu.sjsu.cmpe275.bookshare.model.Listing;
 
 @Service
 public class BookService {
@@ -36,7 +37,14 @@ public class BookService {
 	public void createBook(Book book) {
 		try {
 			System.out.println("in book service");
+			Listing listing = new Listing();
+			listing.setIsbn(book.getIsbn());
+			listing.setIsNegotiable(book.getIsNegotiable());
+			listing.setSeller(book.getUser());
+			
 			getBookDaoImpl().insert(book);
+			
+			getListingDaoImpl().insert(listing);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

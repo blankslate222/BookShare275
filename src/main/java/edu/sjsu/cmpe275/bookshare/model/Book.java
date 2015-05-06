@@ -11,6 +11,7 @@ public class Book {
 	private String author;
 	private String status; // request or forSale
 	private String user; // seller email/ user logged in
+	private String isNegotiable;
 	
 	public int getId() {
 		return id;
@@ -65,6 +66,12 @@ public class Book {
 	}
 	public void setUser(String user) {
 		this.user = user;
+	}
+	public String getIsNegotiable() {
+		return isNegotiable;
+	}
+	public void setIsNegotiable(String isNegotiable) {
+		this.isNegotiable = isNegotiable;
 	}
 	
 }
