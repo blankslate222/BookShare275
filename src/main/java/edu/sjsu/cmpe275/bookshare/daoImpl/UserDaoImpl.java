@@ -28,9 +28,9 @@ public class UserDaoImpl implements UserDao {
 
 	private SessionFactory sessionFactory;
 
-	
-	private DataSource dataSource;
 	@Autowired
+	private DataSource dataSource;
+	
 	public UserDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -231,4 +231,36 @@ public class UserDaoImpl implements UserDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 	
+	
+    public void updateUserhbm(User user) throws SQLException{
+		//sessionFactory.getCurrentSession().saveOrUpdate(user);
+    	Connection conn = null;
+		PreparedStatement ps = null;
+		Integer data = null;
+		String sql = "update user set firstname=?,lastname=?,address=? where email=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, user.getFirstname());
+		ps.setString(2, user.getLastname());
+		ps.setString(3, user.getAddress());
+		ps.setString(4, user.getEmail());
+		
+		
+		data = ps.executeUpdate();
+	
+		
+		try {
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return;
+		
+		
+	
+	}
 }

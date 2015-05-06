@@ -52,7 +52,7 @@
 							<ul class="login"><li><a href="">PURCHASE</a></li> | <li><a href="">SELLING</a></li></ul>
 
 
-<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="">UPDATE ACCOUNT</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li></ul>
+<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/updateuser">UPDATE ACCOUNT</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li></ul>
 						
 					<div class="clearfix"> </div>
 				</div>
