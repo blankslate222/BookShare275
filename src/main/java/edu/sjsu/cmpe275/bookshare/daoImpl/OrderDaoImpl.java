@@ -45,8 +45,8 @@ public class OrderDaoImpl implements OrderDao {
 		Calendar c = Calendar.getInstance();
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		ps.setInt(1, Integer.parseInt(order.getBuyer()));
-		ps.setInt(2, Integer.parseInt(order.getSeller()));
+		ps.setString(1, (order.getBuyer()));
+		ps.setString(2, (order.getSeller()));
 		ps.setString(3, order.getFeedback());
 		ps.setInt(4, order.getRating());
 		ps.setTimestamp(5, new Timestamp(order.getOrderDate().getTimeInMillis()));
@@ -77,7 +77,7 @@ public class OrderDaoImpl implements OrderDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-		String sql = "select * from book where id=?";
+		String sql = "select * from orderBook where id=?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
@@ -89,8 +89,8 @@ public class OrderDaoImpl implements OrderDao {
 		Calendar c = Calendar.getInstance();
 		if(data.next())
 		{
-			newOrder.setBuyer(Integer.toString(data.getInt("buyer")));
-			newOrder.setSeller(Integer.toString(data.getInt("seller")));
+			newOrder.setBuyer((data.getString("buyer")));
+			newOrder.setSeller((data.getString("seller")));
 			newOrder.setFeedback(data.getString("feedback"));
 			newOrder.setRating(data.getInt("rating"));
 			c.setTime(data.getDate("orderDate"));
@@ -143,8 +143,8 @@ public class OrderDaoImpl implements OrderDao {
 		while(data.next())
 		{
 			Order newOrder = new Order();
-			newOrder.setBuyer(Integer.toString(data.getInt("buyer")));
-			newOrder.setSeller(Integer.toString(data.getInt("seller")));
+			newOrder.setBuyer((data.getString("buyer")));
+			newOrder.setSeller((data.getString("seller")));
 			newOrder.setFeedback(data.getString("feedback"));
 			newOrder.setRating(data.getInt("rating"));
 			c.setTime(data.getDate("orderDate"));

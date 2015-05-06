@@ -28,24 +28,6 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-	@RequestMapping(value = "/book/create", method = RequestMethod.GET)
-	public String newBookForm(Model model) {
-		// System.out.println("home controller");
-		Listing listing = new Listing();
-		Book book = new Book();
-		model.addAttribute("book", book);
-		return "home";
-	}
-
-	@RequestMapping(value = "/book/create", method = RequestMethod.POST)
-	public String newBook(@ModelAttribute("book") Book book,
-			BindingResult result, Model model, HttpServletRequest req) {
-		// System.out.println("home controller")
-
-		book.setUser(""+req.getSession().getAttribute("user"));
-		getBookService().createBook(book);
-		
-		return "redirect:/home";
-	}
+	
 
 }

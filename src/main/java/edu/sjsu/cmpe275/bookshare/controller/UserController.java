@@ -18,16 +18,29 @@ public class UserController {
 	@Autowired
 	private UserDao userDao;
 	
-	@RequestMapping(value="/user/new")
+	@RequestMapping(value="/register")
 	public ModelAndView newUser() {
-		ModelAndView model = new ModelAndView("UserForm");
+		ModelAndView model = new ModelAndView("register");
 		model.addObject("user", new User());
 		return model;		
 	}
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
 		userDao.createUserhbm(user);
-		return new ModelAndView("redirect:/new");
+		return new ModelAndView("redirect:/");
 	}
+	@RequestMapping(value="/")
+	public ModelAndView home() {
+		ModelAndView model = new ModelAndView("index");
+		//model.addObject("user", new User());
+		return model;		
+	}
+	@RequestMapping(value="/login")
+	public ModelAndView login() {
+		ModelAndView model = new ModelAndView("login");
+		//model.addObject("user", new User());
+		return model;		
+	}
+	
 	
 }

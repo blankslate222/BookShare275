@@ -88,15 +88,16 @@ public class BookDaoImpl implements BookDao {
 		data = ps.executeQuery();
 	
 			Book newBook = new Book();
-			newBook.setIsbn(Integer.toString(data.getInt("isbn")));
+			if(data.next()){
+			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
-			newBook.setCondition(data.getString("condition"));
+			newBook.setCondition(data.getString("book_condition"));
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
-			newBook.setStatus(data.getString("status"));
+			newBook.setStatus(data.getString("book_status"));
 			newBook.setUser((data.getString("user")));
-		
+			}
 		/*int rowid = 0;
 		if (rs.next()) {
 			System.out.println(rs.toString());
@@ -113,7 +114,48 @@ public class BookDaoImpl implements BookDao {
 		return newBook;
 	}
 
+	public Book getBookById(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from book where id=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, (id));
+		
+		
+		data = ps.executeQuery();
 	
+			Book newBook = new Book();
+			
+			if(data.next()){
+			newBook.setIsbn((data.getString("isbn")));
+			newBook.setTitle(data.getString("title"));
+			newBook.setDescription(data.getString("description"));
+			newBook.setCondition(data.getString("book_condition"));
+			newBook.setPrice(data.getString("price"));
+			newBook.setAuthor(data.getString("author"));
+			newBook.setStatus(data.getString("book_status"));
+			newBook.setUser((data.getString("user")));
+			}
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return newBook;
+	}
+
 	public List<Book> getBookByTitle(String title) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -129,13 +171,13 @@ public class BookDaoImpl implements BookDao {
 		data = ps.executeQuery();
 		while(data.next()){
 		Book newBook = new Book();
-		newBook.setIsbn(Integer.toString(data.getInt("isbn")));
+		newBook.setIsbn((data.getString("isbn")));
 		newBook.setTitle(data.getString("title"));
 		newBook.setDescription(data.getString("description"));
-		newBook.setCondition(data.getString("condition"));
+		newBook.setCondition(data.getString("book_condition"));
 		newBook.setPrice(data.getString("price"));
 		newBook.setAuthor(data.getString("author"));
-		newBook.setStatus(data.getString("status"));
+		newBook.setStatus(data.getString("book_status"));
 		newBook.setUser((data.getString("user")));
 		bookList.add(newBook);
 		}
@@ -173,13 +215,13 @@ public class BookDaoImpl implements BookDao {
 		while(data.next())
 		{
 			Book newBook = new Book();
-			newBook.setIsbn(Integer.toString(data.getInt("isbn")));
+			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
-			newBook.setCondition(data.getString("condition"));
+			newBook.setCondition(data.getString("book_condition"));
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
-			newBook.setStatus(data.getString("status"));
+			newBook.setStatus(data.getString("book_status"));
 			newBook.setUser((data.getString("user")));
 			bookList.add(newBook);
 		}
@@ -218,13 +260,13 @@ public class BookDaoImpl implements BookDao {
 		while(data.next())
 		{
 			Book newBook = new Book();
-			newBook.setIsbn(Integer.toString(data.getInt("isbn")));
+			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
-			newBook.setCondition(data.getString("condition"));
+			newBook.setCondition(data.getString("book_condition"));
 			newBook.setPrice(data.getString("price"));
 			newBook.setAuthor(data.getString("author"));
-			newBook.setStatus(data.getString("status"));
+			newBook.setStatus(data.getString("book_status"));
 			newBook.setUser((data.getString("user")));
 			bookList.add(newBook);
 		}

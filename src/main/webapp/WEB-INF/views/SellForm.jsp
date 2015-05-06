@@ -33,7 +33,7 @@
 <div class="content">
 <div class="col-md-12 text-center">
 	<h1>Sell Book</h1>
-	<form:form action="sell" method="post" modelAttribute="book" class="form-horizontal">
+	<form:form action="/sellbook" method="post" modelAttribute="book" class="form-horizontal">
 	<form:hidden path="id"/>
 	<div class="form-group">
 		

@@ -52,6 +52,15 @@ public class BookService {
 			e1.printStackTrace();
 		}
 	}
-
+public Book getBookById(int id) {
+	Book book = null;
+	try {
+		book = getBookDaoImpl().getBookById(id);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return book;
+}
 	
 }
