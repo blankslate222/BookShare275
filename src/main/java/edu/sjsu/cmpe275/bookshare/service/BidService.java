@@ -20,6 +20,6 @@ public class BidService {
 	}
 	
 	public void offerLowerPrice(String isbn) {
-
+		//System.out.println("lower price quoted for "+ isbn);
 	}	
 }

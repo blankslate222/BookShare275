@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.bookshare.dao.BookDao;
+import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.User;
 
@@ -17,7 +18,7 @@ import edu.sjsu.cmpe275.bookshare.model.User;
 @Controller
 public class TransactionsController {
 	@Autowired
-	private BookDao bookDao;
+	private BookDaoImpl bookDaoImpl;
 	
 	@RequestMapping(value="/book/sell")
 	public ModelAndView sellBook() {
@@ -27,7 +28,7 @@ public class TransactionsController {
 	}
 	@RequestMapping(value = "/book/sell", method = RequestMethod.POST)
 	public ModelAndView saveBook(@ModelAttribute Book book) throws SQLException {
-		bookDao.insert(book);
+		bookDaoImpl.insert(book);
 		System.out.println("this is sparta"+" "+book.getTitle());
 		return new ModelAndView("redirect:/book/sell");
 	}

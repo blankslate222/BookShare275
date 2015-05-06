@@ -12,14 +12,15 @@ import edu.sjsu.cmpe275.bookshare.model.Book;
 @Service
 public class BookService {
 
+	@Autowired
 	private BookDaoImpl bookDaoImpl;
+	@Autowired
 	private ListingDaoImpl listingDaoImpl;
 
 	public BookDaoImpl getBookDaoImpl() {
 		return bookDaoImpl;
 	}
 
-	@Autowired
 	public void setBookDaoImpl(BookDaoImpl bookDaoImpl) {
 		this.bookDaoImpl = bookDaoImpl;
 	}
@@ -27,14 +28,21 @@ public class BookService {
 	public ListingDaoImpl getListingDaoImpl() {
 		return listingDaoImpl;
 	}
-
-	@Autowired
+	
 	public void setListingDaoImpl(ListingDaoImpl listingDaoImpl) {
 		this.listingDaoImpl = listingDaoImpl;
 	}
 
 	public void createBook(Book book) {
-
+		try {
+			System.out.println("in book service");
+			getBookDaoImpl().insert(book);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	

@@ -35,13 +35,14 @@ public class ListingDaoImpl implements ListingDao {
 		int insert = 0;
 
 		String sql = "insert into listingDetails"
-				+ "(isbn, isNegotiable) "
-				+ " values(?,?)";
+				+ "(isbn, isNegotiable, seller) "
+				+ " values(?,?,?)";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		ps.setInt(1, Integer.parseInt(listing.getIsbn()));
+		ps.setString(1, (listing.getIsbn()));
 		ps.setString(2, listing.getIsNegotiable());
+		ps.setString(3,  listing.getSeller());
 		
 		insert = ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
@@ -77,8 +78,9 @@ public class ListingDaoImpl implements ListingDao {
 		data = ps.executeQuery();
 		Listing newList = new Listing();
 		newList.setId(data.getInt("id"));
-		newList.setIsbn(Integer.toString(data.getInt("isbn")));
+		newList.setIsbn((data.getString("isbn")));
 		newList.setIsNegotiable(data.getString("isNegotiable"));
+		newList.setSeller(data.getString("seller"));
 		
 		/*int rowid = 0;
 		if (rs.next()) {
@@ -111,9 +113,9 @@ public class ListingDaoImpl implements ListingDao {
 		data = ps.executeQuery();
 		Listing newList = new Listing();
 		newList.setId(data.getInt("id"));
-		newList.setIsbn(Integer.toString(data.getInt("isbn")));
+		newList.setIsbn((data.getString("isbn")));
 		newList.setIsNegotiable(data.getString("isNegotiable"));
-		
+		newList.setSeller(data.getString("seller"));
 		/*int rowid = 0;
 		if (rs.next()) {
 			System.out.println(rs.toString());

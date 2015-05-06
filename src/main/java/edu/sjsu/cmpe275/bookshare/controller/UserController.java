@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.bookshare.dao.UserDao;
+import edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.User;
 @Controller
 public class UserController {
 	@Autowired
-	private UserDao userDao;
+	private UserDaoImpl userDaoImpl;
 	
 	@RequestMapping(value="/user/new")
 	public ModelAndView newUser() {
@@ -25,7 +26,7 @@ public class UserController {
 	}
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
-		userDao.createUserhbm(user);
+		userDaoImpl.createUserhbm(user);
 		return new ModelAndView("redirect:/new");
 	}
 	

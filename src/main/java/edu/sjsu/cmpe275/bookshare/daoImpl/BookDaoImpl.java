@@ -38,13 +38,13 @@ public class BookDaoImpl implements BookDao {
 		int insert = 0;
 
 		String sql = "insert into book"
-				+ "(isbn,title,description,condition,price,author,status, user) "
+				+ "(isbn,title,description,condition,price,author,status,user) "
 				+ "values(?,?,?,?,?,?,?,?)";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		System.out.println(book.getIsbn()+"hello my name is anirudh");
-		ps.setInt(1, Integer.parseInt(book.getIsbn().toString()));
+		ps.setString(1, (book.getIsbn()));
 		
 		ps.setString(2, book.getTitle());
 		ps.setString(3, book.getDescription());

@@ -5,6 +5,7 @@ public class Listing {
 	private int id;
 	private String isbn;
 	private String isNegotiable;
+	private String seller;
 
 	public int getId() {
 		return id;
@@ -28,6 +29,14 @@ public class Listing {
 
 	public void setIsNegotiable(String isNegotiable) {
 		this.isNegotiable = isNegotiable;
+	}
+
+	public String getSeller() {
+		return seller;
+	}
+
+	public void setSeller(String seller) {
+		this.seller = seller;
 	}
 
 }
