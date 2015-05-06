@@ -59,7 +59,14 @@
 <legend>Share Book</legend>
 
 <!-- Text input-->
-
+<h2>Thank you for using Bookshare</h2>
+<h3>
+Your Order Summary
+</h3>
+Book ISBN: ${order.isbn}
+Sold By: ${order.seller}
+Price: ${order.price}
+<p>Your feedback is valuable to us</p>
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="condition">Ratings</label>
