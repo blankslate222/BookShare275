@@ -57,7 +57,7 @@
 </div>
 	<!---->
 	
-	<form:form action="${pageContext.request.contextPath}/sell/book" method="post" modelAttribute="book" class="form-horizontal">
+	<form:form action="${pageContext.request.contextPath}/book/request" method="post" modelAttribute="book" class="form-horizontal">
 <form:hidden path="id"/>
 <fieldset>
 

@@ -60,8 +60,7 @@ public class TransactionsController {
 			BindingResult result, Model model, HttpServletRequest req) {
 
 		book.setUser("" + req.getSession().getAttribute("user"));
-		bookService.createBook(book);
-
+		bookService.createBookRequest(book);
 		return "redirect:/";
 	}
 
@@ -77,7 +76,7 @@ public class TransactionsController {
 	
 	@RequestMapping(value = "details/book/{id}",method = RequestMethod.GET)
 	public ModelAndView bookDetails(@PathVariable("id") int id, Model model) {
-		ModelAndView orderSummary = new ModelAndView("Blank");
+		ModelAndView orderSummary = new ModelAndView("BookDetails");
 		Book book = bookService.getBookById(id);
 		orderSummary.addObject("book", book );
 		return orderSummary;

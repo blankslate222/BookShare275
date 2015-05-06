@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl;
+import edu.sjsu.cmpe275.bookshare.daoImpl.RequestBookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.Listing;
 
@@ -17,7 +18,9 @@ public class BookService {
 	private BookDaoImpl bookDaoImpl;
 	@Autowired
 	private ListingDaoImpl listingDaoImpl;
-
+	@Autowired
+	private RequestBookDaoImpl reqBookDaoImpl;
+	
 	public BookDaoImpl getBookDaoImpl() {
 		return bookDaoImpl;
 	}
@@ -29,7 +32,7 @@ public class BookService {
 	public ListingDaoImpl getListingDaoImpl() {
 		return listingDaoImpl;
 	}
-	
+
 	public void setListingDaoImpl(ListingDaoImpl listingDaoImpl) {
 		this.listingDaoImpl = listingDaoImpl;
 	}
@@ -41,26 +44,35 @@ public class BookService {
 			listing.setIsbn(book.getIsbn());
 			listing.setIsNegotiable(book.getIsNegotiable());
 			listing.setSeller(book.getUser());
-			
+
 			getBookDaoImpl().insert(book);
-			
+
 			getListingDaoImpl().insert(listing);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch(Exception e1) {
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-public Book getBookById(int id) {
-	Book book = null;
-	try {
-		book = getBookDaoImpl().getBookById(id);
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+	public Book getBookById(int id) {
+		Book book = null;
+		try {
+			book = getBookDaoImpl().getBookById(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return book;
 	}
-	return book;
-}
-	
+
+	public void createBookRequest(Book book) {
+		try {
+			reqBookDaoImpl.createBookRequest(book);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

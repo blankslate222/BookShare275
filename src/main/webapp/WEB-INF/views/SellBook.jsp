@@ -104,6 +104,17 @@
     	 </form:select>
   </div>
 </div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="condition">Price Negotiable</label>
+  <div class="col-md-4">
+    <form:select path="isNegotiable" id="isNegotiable" name="isNegotiable" class="form-control">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+      
+    	 </form:select>
+  </div>
+</div>
+
 
 <!-- Textarea -->
 <div class="form-group">

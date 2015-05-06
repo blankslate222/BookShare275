@@ -89,6 +89,7 @@ public class BookDaoImpl implements BookDao {
 	
 			Book newBook = new Book();
 			if(data.next()){
+			newBook.setId((data.getInt("id")));
 			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
@@ -131,6 +132,7 @@ public class BookDaoImpl implements BookDao {
 			Book newBook = new Book();
 			
 			if(data.next()){
+			newBook.setId((data.getInt("id")));
 			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
@@ -171,6 +173,7 @@ public class BookDaoImpl implements BookDao {
 		data = ps.executeQuery();
 		while(data.next()){
 		Book newBook = new Book();
+		newBook.setId((data.getInt("id")));
 		newBook.setIsbn((data.getString("isbn")));
 		newBook.setTitle(data.getString("title"));
 		newBook.setDescription(data.getString("description"));
@@ -215,6 +218,7 @@ public class BookDaoImpl implements BookDao {
 		while(data.next())
 		{
 			Book newBook = new Book();
+			newBook.setId((data.getInt("id")));
 			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));
@@ -260,6 +264,7 @@ public class BookDaoImpl implements BookDao {
 		while(data.next())
 		{
 			Book newBook = new Book();
+			newBook.setId((data.getInt("id")));
 			newBook.setIsbn((data.getString("isbn")));
 			newBook.setTitle(data.getString("title"));
 			newBook.setDescription(data.getString("description"));

@@ -103,7 +103,7 @@
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-8">
     <button type = "submit" id="submit" name="submit" class="btn btn-success">Submit</button>
-    <button id="cancel" name="cancel" class="btn btn-danger">cancel</button>
+    <button id="cancel" name="cancel" class="btn btn-danger">Cancel</button>
   </div>
 </div>
 

@@ -47,6 +47,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
 	<bean id="bookDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl"></bean>
 	<bean id="listingDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl"></bean>
 	<bean id="orderDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.OrderDaoImpl"></bean>
+	<bean id="reqBookDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.RequestBookDaoImpl"></bean>
 	
 	
 	<bean id="dataSource"
