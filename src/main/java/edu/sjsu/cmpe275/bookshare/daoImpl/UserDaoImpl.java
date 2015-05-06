@@ -227,9 +227,39 @@ public class UserDaoImpl implements UserDao {
 		return;
 	}
 	
-	@Transactional
+/*	@Transactional
     public void createUserhbm(User user){
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
+	}*/
+	@Transactional
+	 public String createUserhbm(User user){
+			System.out.println("=========="+get(user));
+			if(get(user)!="success"){
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
+			}
+			else{
+				String message ="user exists";
+				return message;
+			}
+			String message ="success";
+			return message;
+		}
+	@Transactional
+	public String get(User user){
+    String hql = "from User as u where u.email=:email ";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", user.getEmail());
+		
+		@SuppressWarnings("unchecked")
+		List<User> listUser = (List<User>) query.list();
+		System.out.println(listUser);
+		if (listUser != null && !listUser.isEmpty()) {
+			System.out.println(listUser.get(0));
+			String message ="success";
+			return message ;
+		}
+		
+		return null;
 	}
 	
 	@Transactional

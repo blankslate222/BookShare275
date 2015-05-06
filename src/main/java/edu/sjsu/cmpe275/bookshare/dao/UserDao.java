@@ -16,10 +16,11 @@ public interface UserDao {
 	
 	public void deleteUser(int id) throws SQLException;
      
-	public void createUserhbm(User user) throws SQLException;
+	//public void createUserhbm(User user) throws SQLException;
 	
 	public void updateUserhbm(User user) throws SQLException;
 	
 	public User get(String email,String password);
+	public String createUserhbm(User user);
 	
 }

@@ -25,7 +25,7 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}"><img src="images/logo.png" alt=" "></a>
+						<a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/logo.png" alt=" "></a>
 					</div>
 					
 					<div class="clearfix"> </div>
@@ -123,7 +123,7 @@
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-8">
     <button type = "submit" id="submit" name="submit" class="btn btn-success">Submit</button>
-    <button id="cancel" name="cancel" class="btn btn-danger">cancel</button>
+    <button type = "reset" id="cancel" name="cancel" class="btn btn-danger">cancel</button>
   </div>
 </div>
 

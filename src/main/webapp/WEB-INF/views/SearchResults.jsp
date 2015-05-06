@@ -67,18 +67,18 @@
 				</div>
 				<div class="header-bottom-right">
 					<div class="account">
-						<a href=""><span> </span>YOUR ACCOUNT</a>
+						<a href="${pageContext.request.contextPath}/useraccount"><span> </span>YOUR ACCOUNT</a>
 					</div>
 					<ul class="login">
-						<li><a href="">SELL</a></li> |
-						<li><a href="">REQUEST</a></li>
+						<li><a href="${pageContext.request.contextPath}/sell/book">SELL</a></li> |
+						<li><a href="${pageContext.request.contextPath}/book/request">REQUEST</a></li>
 					</ul>
 
 
 					<ul class="login">
-						<li><a href="">LOGOUT</a></li> |
-						<li><a href="">ADs</a></li>
-						<li><a href="">ADVANCE SEARCH</a></li>
+						<li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> |
+						<li><a href="${pageContext.request.contextPath}/allrequestedbooks">ADs</a></li>
+						<li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>
 					</ul>
 
 					<div class="clearfix"></div>
@@ -96,7 +96,7 @@
 		<c:when test="${ not empty books }">
 			<ul>
 				<c:forEach var="buk" items="${books}">
-					<img src=""/>
+					<img src="${pageContext.request.contextPath}/images/wat.gif"/>
 					<li><a href="${pageContext.request.contextPath}/details/book/${buk.id}">${buk.title}</a></li>
 				</c:forEach>
 			</ul>

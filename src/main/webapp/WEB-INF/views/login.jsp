@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Login :: w3layouts</title>
+<title>BOOKSHARE| Login </title>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -57,7 +57,7 @@
 					<span>Password<label>*</label></span>
 					<form:input path = "password" type="password"/> 
 				  </div>
-				  <a class="forgot" href="#">Forgot Your Password?</a>
+				 
 				  <input type="submit" value="Login">
 			    </form:form>
 			    <p> <%if(request.getParameter("message")!=null){ %>
@@ -66,7 +66,7 @@
 <%} %></p>
 			   </div>	
 			    <div class=" login-left">
-			  	 <h3>NEW CUSTOMERS</h3>
+			  	 <h3>NEW USERS</h3>
 				 
 				 <a class="acount-btn" href="register">Create an Account</a>
 			   </div>

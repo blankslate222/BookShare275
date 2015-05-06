@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
+<title>BOOKSHARE| Register </title>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -77,6 +77,10 @@
 					   <div class="clearfix"> </div>
 				
 				</div>
+				 <p> <%if(request.getParameter("message")!=null){ %>
+ <%=request.getParameter("message") %>
+
+<%} %></p>
 					</form:form>
 		   </div>
 		         

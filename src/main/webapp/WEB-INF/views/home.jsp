@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Product :: w3layouts</title>
+<title>BOOKSHARE| Home </title>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -18,7 +18,7 @@
 <!--script-->
 </head>
 <body> 
-<%if(session.getAttribute("email")== null){%>
+<%if(session.getAttribute("user")== null){%>
 <jsp:forward page="${pageContext.request.contextPath}"></jsp:forward>
 <%	
 } %>
@@ -29,7 +29,7 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}"><img src="images/logo.png" alt=" "></a>
+						<a href="${pageContext.request.contextPath}/home"><img src="images/logo.png" alt=" "></a>
 					</div>
 					
 					<div class="clearfix"> </div>
@@ -56,45 +56,45 @@
 		<!-- grids_of_4 -->
 		<div class="grid-product">
 		  <div class="  product-grid">
-			<div class="content_box"><a href="single.html">
-			   	</a><div class="left-grid-view grid-view-left"><a href="single.html">
-			   	   	 <img src="images/pic13.jpg" class="img-responsive watch-right" alt="">
+			<div class="content_box"><a href="">
+			   	</a><div class="left-grid-view grid-view-left"><a href="">
+			   	   	 <img src="images/ba.jpg" class="img-responsive watch-right" alt="">
 				   	   	<div class="mask">
 	                        <div class="info">Quick View</div>
 			            </div>
 				   	  </a>
 				</div>
-				    <h4><a href="#"> Duis autem</a></h4>
-				     <p>It is a long established fact that a reader</p>
-				     Rs. 499
+				    <h4><a href="#">The Lewis Man</a></h4>
+				     <p>It is a long established fact that a reader is always curious</p>
+				   $20
 			   	</div>
               </div>
 			 <div class="  product-grid">
-			<div class="content_box"><a href="single.html">
-			   	</a><div class="left-grid-view grid-view-left"><a href="single.html">
-			   	   	 <img src="images/pic2.jpg" class="img-responsive watch-right" alt="">
+			<div class="content_box"><a href="">
+			   	</a><div class="left-grid-view grid-view-left"><a href="">
+			   	   	 <img src="images/bag.jpg" class="img-responsive watch-right" alt="">
 				   	   	<div class="mask">
 	                        <div class="info">Quick View</div>
 			            </div>
 				   	  </a>
 				   </div>
-				    <h4><a href="#"> Duis autem</a></h4>
-				     <p>It is a long established fact that a reader</p>
-				     Rs. 499
+				    <h4><a href="#">Spring Recipes</a></h4>
+				     <p>Must book for Software Developer</p>
+				     $35
 			   	</div>
                  </div>
 			 <div class="  product-grid">
-			<div class="content_box"><a href="single.html">
-			   	</a><div class="left-grid-view grid-view-left"><a href="single.html">
-			   	   	 <img src="images/pic3.jpg" class="img-responsive watch-right" alt="">
+			<div class="content_box"><a href="">
+			   	</a><div class="left-grid-view grid-view-left"><a href="">
+			   	   	 <img src="images/bag1.jpg" class="img-responsive watch-right" alt="">
 				   	   	<div class="mask">
 	                        <div class="info">Quick View</div>
 			            </div>
 				   	  </a>
 				   </div>
-				    <h4><a href="#"> Duis autem</a></h4>
-				     <p>It is a long established fact that a reader</p>
-				     Rs. 499
+				    <h4><a href="#">JAVA EE Spring Patterns</a></h4>
+				     <p>Must know Spring Patterns</p>
+				   $30
 			   	</div>
                  </div>
 				
@@ -127,7 +127,7 @@
 			});
 		</script>
 					<div class=" chain-grid menu-chain">
-	   		     		<a href=""><img class="img-responsive chain" src="images/wat.jpg" alt=" "></a>	   		     		
+	   		     		<a href=""><img class="img-responsive chain" src="images/wat.gif" alt=" "></a>	   		     		
 	   		     		<div class="grid-chain-bottom chain-watch">
 		   		     		<span class="actual dolor-left-grid">300$</span>
 		   		     		<span class="reducedfrom">500$</span>  

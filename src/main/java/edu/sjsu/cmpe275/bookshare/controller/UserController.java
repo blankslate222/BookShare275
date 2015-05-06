@@ -28,10 +28,21 @@ public class UserController {
 		model.addObject("user", new User());
 		return model;		
 	}
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
 		userDao.createUserhbm(user);
 		return new ModelAndView("redirect:/");
+	}*/
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
+		if(userDao.createUserhbm(user)=="success")
+		{
+		return new ModelAndView("redirect:/");
+		}
+		else{
+			String message ="username exists";
+			return new ModelAndView("redirect:/register","message",message);
+		}
 	}
 	@RequestMapping(value="/")
 	public ModelAndView home(Model modl) {
@@ -54,7 +65,7 @@ public class UserController {
 	      if(userDao.get(email, password)!=null)
 	      {
 	    	  System.out.println("success");
-	    	  req.getSession().setAttribute("email",email);
+	    	  req.getSession().setAttribute("user",email);
 	    	  return new ModelAndView("redirect:/home");
 	    	  
 	      }

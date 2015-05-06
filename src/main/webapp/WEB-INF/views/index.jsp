@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
+<title>BOOKSHARE | Home </title>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -51,13 +51,13 @@
 					   <article style="position: absolute; width: 100%; opacity: 0;">					
 						<div class="banner-matter">
 						<div class="col-md-5 banner-bag">
-							<img class="img-responsive " src="images/bag.jpg" alt=" ">
+							<img class="img-responsive " src="images/ba.jpg" alt=" ">
 							</div>
 							<div class="col-md-7 banner-off">							
-								<h2>FLAT 50% 0FF</h2>
-								<label>FOR ALL PURCHASE <b>VALUE</b></label>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-								<span class="on-get">GET NOW</span>
+								<h2>SELL OR SHARE</h2>
+								
+								<p>THE LEWIS MAN</p>					
+								
 							</div>
 							
 							<div class="clearfix"> </div>
@@ -70,10 +70,10 @@
 							<img class="img-responsive " src="images/bag1.jpg" alt=" ">
 							</div>
 							<div class="col-md-7 banner-off">							
-								<h2>FLAT 50% 0FF</h2>
-								<label>FOR ALL PURCHASE <b>VALUE</b></label>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-								<span class="on-get">GET NOW</span>
+								<h2>SELL OR SHARE</h2>
+								
+								<p> JAVA EE Spring Patterns</p>					
+								
 							</div>
 							
 							<div class="clearfix"> </div>
@@ -86,10 +86,10 @@
 							<img class="img-responsive " src="images/bag.jpg" alt=" ">
 							</div>
 							<div class="col-md-7 banner-off">							
-								<h2>FLAT 50% 0FF</h2>
-								<label>FOR ALL PURCHASE <b>VALUE</b></label>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>					
-								<span class="on-get">GET NOW</span>
+								<h2>SELL OR SHARE</h2>
+								
+								<p>Spring Recipes</p>					
+								
 							</div>
 							
 							<div class="clearfix"> </div>
@@ -112,48 +112,18 @@
 	          </div>
 	           	
 	   		      <!---->
-	   		     <div class="shoes-grid-left">
-			<a href="single.html">				 
-	   		     	<div class="col-md-6 con-sed-grid">
-					
-	   		     		<div class=" elit-grid"> 
-						
-		   		     		<h4>consectetur  elit</h4>
-		   		     		<label>FOR ALL PURCHASE VALUE</label>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
-							<span class="on-get">GET NOW</span>						
-						</div>						
-						<img class="img-responsive shoe-left" src="images/sh.jpg" alt=" ">
-							
-						<div class="clearfix"> </div>
-						
-	   		     	</div>
-					</a>
-					<a href="single.html">	
-	   		     	<div class="col-md-6 con-sed-grid sed-left-top">
-	   		     		<div class=" elit-grid"> 
-		   		     		<h4>consectetur  elit</h4>
-		   		     		<label>FOR ALL PURCHASE VALUE</label>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
-							<span class="on-get">GET NOW</span>
-						</div>		
-						<img class="img-responsive shoe-left" src="images/wa.jpg" alt=" ">
-						
-						<div class="clearfix"> </div>
-	   		     	</div>
-					</a>
-	   		     </div>
+	   		    
 	   		    
 	   		     <div class="product-left">
 	   		     	<div class="col-md-4 chain-grid">
-	   		     		<a href="single.html"><img class="img-responsive chain" src="images/ch.jpg" alt=" "></a>
+	   		     		<a href="single.html"><img class="img-responsive chain" src="images/ba.jpg" alt=" "></a>
 	   		     		<span class="star"> </span>
 	   		     		<div class="grid-chain-bottom">
-	   		     			<h6><a href="single.html">Lorem ipsum dolor</a></h6>
+	   		     			<h6><a href="single.html">The Lewis Man</a></h6>
 	   		     			<div class="star-price">
 	   		     				<div class="dolor-grid"> 
-		   		     				<span class="actual">300$</span>
-		   		     				<span class="reducedfrom">400$</span>
+		   		     				<span class="actual">20$</span>
+		   		     				<span class="reducedfrom">40$</span>
 		   		     				  <span class="rating">
 									        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
 									        <label for="rating-input-1-5" class="rating-star1"> </label>
@@ -167,20 +137,20 @@
 									        <label for="rating-input-1-1" class="rating-star"> </label>
 							    	   </span>
 	   		     				</div>
-	   		     				<a class="now-get get-cart" href="#">ADD TO CART</a> 
+	   		     				<a class="now-get get-cart" href="#">GET NOW</a> 
 	   		     				<div class="clearfix"> </div>
 							</div>
 	   		     		</div>
 	   		     	</div>
 	   		     	<div class="col-md-4 chain-grid">
-	   		     		<a href="single.html"><img class="img-responsive chain" src="images/ba.jpg" alt=" "></a>
+	   		     		<a href="single.html"><img class="img-responsive chain" src="images/bag1.jpg" alt=" "></a>
 	   		     		<span class="star"> </span>
 	   		     		<div class="grid-chain-bottom">
-	   		     			<h6><a href="single.html">Lorem ipsum dolor</a></h6>
+	   		     			<h6><a href="single.html">JAVA EE Spring Patterns</a></h6>
 	   		     			<div class="star-price">
 	   		     				<div class="dolor-grid"> 
-		   		     				<span class="actual">300$</span>
-		   		     				<span class="reducedfrom">400$</span>
+		   		     				<span class="actual">30$</span>
+		   		     				<span class="reducedfrom">40$</span>
 		   		     				  <span class="rating">
 									        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
 									        <label for="rating-input-1-5" class="rating-star1"> </label>
@@ -194,20 +164,20 @@
 									        <label for="rating-input-1-1" class="rating-star"> </label>
 							    	   </span>
 	   		     				</div>
-	   		     				<a class="now-get get-cart" href="#">ADD TO CART</a> 
+	   		     				<a class="now-get get-cart" href="#">GET NOW</a> 
 	   		     				<div class="clearfix"> </div>
 							</div>
 	   		     		</div>
 	   		     	</div>
 	   		     	<div class="col-md-4 chain-grid grid-top-chain">
-	   		     		<a href="single.html"><img class="img-responsive chain" src="images/bo.jpg" alt=" "></a>
+	   		     		<a href="single.html"><img class="img-responsive chain" src="images/bag.jpg" alt=" "></a>
 	   		     		<span class="star"> </span>
 	   		     		<div class="grid-chain-bottom">
-	   		     			<h6><a href="single.html">Lorem ipsum dolor</a></h6>
+	   		     			<h6><a href="single.html">Spring Recipes</a></h6>
 	   		     			<div class="star-price">
 	   		     				<div class="dolor-grid"> 
-		   		     				<span class="actual">300$</span>
-		   		     				<span class="reducedfrom">400$</span>
+		   		     				<span class="actual">35$</span>
+		   		     				<span class="reducedfrom">40$</span>
 		   		     				  <span class="rating">
 									        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
 									        <label for="rating-input-1-5" class="rating-star1"> </label>
@@ -221,7 +191,7 @@
 									        <label for="rating-input-1-1" class="rating-star"> </label>
 							    	   </span>
 	   		     				</div>
-	   		     				<a class="now-get get-cart" href="#">ADD TO CART</a> 
+	   		     				<a class="now-get get-cart" href="#">GET NOW</a> 
 	   		     				<div class="clearfix"> </div>
 							</div>
 	   		     		</div>
