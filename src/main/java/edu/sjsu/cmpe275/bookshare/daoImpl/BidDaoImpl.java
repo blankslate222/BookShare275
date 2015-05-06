@@ -39,15 +39,16 @@ public class BidDaoImpl implements BidDao{
 		int insert = 0;
 
 		String sql = "insert into bidDetails"
-				+ "(listingId, bidderEmail, offerPrice, bidTime) "
-				+ " values(?,?,?,?)";
+				+ "(bookId, bidderEmail, offerPrice, bidTime, seller) "
+				+ " values(?,?,?,?, ?)";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		ps.setInt(1, bid.getListingId());
+		ps.setInt(1, bid.getBookId());
 		ps.setString(2, bid.getBidderEmail());
 		ps.setString(3, bid.getOfferPrice());
 		ps.setTimestamp(4, new Timestamp(bid.getBidTime().getTimeInMillis()));
+		ps.setString(5, bid.getSeller());
 		
 		insert = ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
@@ -67,16 +68,16 @@ public class BidDaoImpl implements BidDao{
 		return (rowid);
 	}
 
-	public List<Bid> getBidByListingId(int listingId) throws SQLException {
+	public List<Bid> getBidByBookId(int bookId) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-		String sql = "select * from bidDetails where listingId=?";
+		String sql = "select * from bidDetails where bookId=?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setInt(1, listingId);
+		ps.setInt(1, bookId);
 		
 		
 		data = ps.executeQuery();
@@ -89,8 +90,9 @@ public class BidDaoImpl implements BidDao{
 			c.setTime(data.getDate("bidTime"));
 			newBook.setBidTime(c);
 			newBook.setId(data.getInt("id"));
-			newBook.setListingId(data.getInt("listingId"));
+			newBook.setBookId(data.getInt("bookId"));
 			newBook.setOfferPrice(data.getString("offerPrice"));
+			newBook.setSeller(data.getString("seller"));
 			bidList.add(newBook);
 		}
 		
@@ -130,8 +132,9 @@ public class BidDaoImpl implements BidDao{
 		c.setTime(data.getDate("bidTime"));
 		bidData.setBidTime(c);
 		bidData.setId(data.getInt("id"));
-		bidData.setListingId(data.getInt("listingId"));
+		bidData.setBookId(data.getInt("bookId"));
 		bidData.setOfferPrice(data.getString("offerPrice"));
+		bidData.setSeller(data.getString("seller"));
 		
 		/*int rowid = 0;
 		if (rs.next()) {
@@ -167,6 +170,55 @@ public class BidDaoImpl implements BidDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<Bid> getBidBySeller(String seller) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from bidDetails where seller=?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, seller);
+		
+		
+		data = ps.executeQuery();
+		List<Bid> bidList = new ArrayList<Bid>();
+		Calendar c = Calendar.getInstance();
+		while(data.next())
+		{
+			Bid newBook = new Bid();
+			newBook.setBidderEmail(data.getString("bidderEmail"));
+			c.setTime(data.getDate("bidTime"));
+			newBook.setBidTime(c);
+			newBook.setId(data.getInt("id"));
+			newBook.setBookId(data.getInt("bookId"));
+			newBook.setOfferPrice(data.getString("offerPrice"));
+			newBook.setSeller(data.getString("seller"));
+			bidList.add(newBook);
+		}
+		
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (bidList);
+	}
+
+	public List<Bid> getBidByListingId(int listingId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

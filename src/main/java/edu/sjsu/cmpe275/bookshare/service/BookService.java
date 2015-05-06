@@ -40,14 +40,10 @@ public class BookService {
 	public void createBook(Book book) {
 		try {
 			System.out.println("in book service");
-			Listing listing = new Listing();
-			listing.setIsbn(book.getIsbn());
-			listing.setIsNegotiable(book.getIsNegotiable());
-			listing.setSeller(book.getUser());
 
 			getBookDaoImpl().insert(book);
 
-			getListingDaoImpl().insert(listing);
+			//getListingDaoImpl().insert(listing);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

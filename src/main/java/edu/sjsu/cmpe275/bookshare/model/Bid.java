@@ -5,10 +5,11 @@ import java.util.Calendar;
 public class Bid {
 
 	private int id;
-	private int listingId;
+	private int bookId;
 	private String bidderEmail;
 	private String offerPrice;
 	private Calendar bidTime;
+	private String seller;
 	
 	public int getId() {
 		return id;
@@ -16,11 +17,11 @@ public class Bid {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getListingId() {
-		return listingId;
+	public int getBookId() {
+		return bookId;
 	}
-	public void setListingId(int listingId) {
-		this.listingId = listingId;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 	public String getBidderEmail() {
 		return bidderEmail;
@@ -39,5 +40,11 @@ public class Bid {
 	}
 	public void setBidTime(Calendar bidTime) {
 		this.bidTime = bidTime;
+	}
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
 	} 
 }

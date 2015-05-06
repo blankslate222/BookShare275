@@ -46,7 +46,7 @@ public class OrderService {
 		this.listingDaoImpl = listingDaoImpl;
 	}
 
-	private Order createOrder(Book book, String buyer) {
+	public Order createOrder(Book book, String buyer) {
 		Order generatedOrder = null;
 		Order order = null;
 		try {
@@ -57,6 +57,7 @@ public class OrderService {
 			order.setPrice(book.getPrice());
 			order.setOrderDate(Calendar.getInstance());
 			int orderedId = getOrderDaoImpl().insert(order);
+			getBookDaoImpl().updateBookById(book.getId());
 			generatedOrder = getOrderDaoImpl().getOrderById(orderedId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
