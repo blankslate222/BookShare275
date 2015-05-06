@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -231,6 +232,25 @@ public class UserDaoImpl implements UserDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 	
+	@Transactional
+	public User get(String email,String password) {
+		System.out.println("email"+email);
+		System.out.println("password"+password);
+		System.out.println("get called");
+		String hql = "from User as u where u.email=:email and u.password=:password ";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email).setParameter("password", password);
+		
+		@SuppressWarnings("unchecked")
+		List<User> listUser = (List<User>) query.list();
+		System.out.println(listUser);
+		if (listUser != null && !listUser.isEmpty()) {
+			System.out.println(listUser.get(0));
+			return listUser.get(0);
+		}
+		
+		return null;
+	}
 	
     public void updateUserhbm(User user) throws SQLException{
 		//sessionFactory.getCurrentSession().saveOrUpdate(user);

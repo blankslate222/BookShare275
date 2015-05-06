@@ -20,4 +20,6 @@ public interface UserDao {
 	
 	public void updateUserhbm(User user) throws SQLException;
 	
+	public User get(String email,String password);
+	
 }

@@ -18,6 +18,10 @@
 <!--script-->
 </head>
 <body> 
+<%if(session.getAttribute("email")== null){%>
+<jsp:forward page="${pageContext.request.contextPath}"></jsp:forward>
+<%	
+} %>
 	<!--header-->
 	<div class="header">
 		
