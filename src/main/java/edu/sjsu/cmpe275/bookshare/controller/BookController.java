@@ -28,7 +28,7 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/book/create", method = RequestMethod.GET)
 	public String newBookForm(Model model) {
 		// System.out.println("home controller");
 		Listing listing = new Listing();
@@ -37,7 +37,7 @@ public class BookController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	@RequestMapping(value = "/book/create", method = RequestMethod.POST)
 	public String newBook(@ModelAttribute("book") Book book,
 			BindingResult result, Model model, HttpServletRequest req) {
 		// System.out.println("home controller")
