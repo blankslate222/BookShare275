@@ -25,21 +25,17 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="index.html"><img src="${pageContext.request.contextPath}/images/logo.png" alt=" "></a>
+						<a href="${pageContext.request.contextPath}"><img src="images/logo.png" alt=" "></a>
 					</div>
-					<div class="search">
-						<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-						<input type="submit" value="SEARCH">
-
-					</div>
+					
 					<div class="clearfix"> </div>
 				</div>
 				<div class="header-bottom-right">					
-						<div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>
-							<ul class="login"><li><a href="register.html">LOGOUT</a></li> | <li><a href="register.html">SELL</a></li></ul>
+						<div class="account"><a href="${pageContext.request.contextPath}/useraccount"><span> </span>YOUR ACCOUNT</a></div>
+							<ul class="login"><li><a href="${pageContext.request.contextPath}/sell/book">SELL</a></li> | <li><a href="${pageContext.request.contextPath}/book/request">REQUEST</a></li></ul>
 
 
-<ul class="login"><li><a href="register.html">LOGOUT</a></li> | <li><a href="register.html">SELL</a></li></ul><ul class="login"><li><a href="register.html">LOGOUT</a></li> | <li><a href="register.html">SELL</a></li></ul>
+<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/allrequestedbooks">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li></ul>
 						
 					<div class="clearfix"> </div>
 				</div>

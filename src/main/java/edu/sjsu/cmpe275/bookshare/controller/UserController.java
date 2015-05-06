@@ -41,6 +41,23 @@ public class UserController {
 		//model.addObject("user", new User());
 		return model;		
 	}
-	
+	@RequestMapping(value="/home")
+	public ModelAndView userhome() {
+		ModelAndView model = new ModelAndView("home");
+		//model.addObject("user", new User());
+		return model;		
+	}
+	@RequestMapping(value="/useraccount")
+	public ModelAndView useraccount() {
+		ModelAndView model = new ModelAndView("userAccount");
+		//model.addObject("user", new User());
+		return model;		
+	}
+	@RequestMapping(value="/allrequestedbooks")
+	public ModelAndView allrequestedbooks() {
+		ModelAndView model = new ModelAndView("allRequested");
+		//model.addObject("user", new User());
+		return model;		
+	}
 	
 }

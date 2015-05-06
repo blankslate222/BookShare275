@@ -3,16 +3,16 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html><head>
 <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Product :: w3layouts</title>
-<link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
-<link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">	
+<link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <!--//fonts-->
-<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
+<script src="js/js/jquery.min.js"></script>
 
 
 <!--script-->
@@ -43,43 +43,10 @@
 			</div>
 		</div>
 	</div>
-	<!---->
-	<!-- start content -->
-	<div class="container">
-		
 	
-	
-	
-</div>
-	<!---->
-	
-	<form:form action="${pageContext.request.contextPath}/book/purchase" method="post" modelAttribute="book" class="form-horizontal">
-<form:hidden path="id"/>
-<fieldset>
-
-<!-- Form Name -->
-<legend>Share Book</legend>
-
-
-<div class="form-group">
-  <label class="col-md-4 control-label" for="isbn"></label>  
-  <div class="col-md-5">
-  <form:input path="isbn" id="isbn" name="isbn" type="hidden" placeholder="" class="form-control input-md" required=""/>
-    
-  </div>
-</div>
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
-  <div class="col-md-8">
-    <button type = "submit" id="submit" name="submit" class="btn btn-success">Buy</button>
-    <button id="cancel" name="cancel" class="btn btn-danger">cancel</button>
-  </div>
-</div>
-
-</fieldset>
-</form:form>
-
+	<div class="container"> 
+	 	
+	 	</div>
 	
 
 </body></html>

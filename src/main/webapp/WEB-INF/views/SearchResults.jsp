@@ -6,11 +6,11 @@
 <html>
 <head>
 <title>Search Results</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
+<link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css"
 	media="all">
 <!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all">
-<link rel="stylesheet" href="css/etalage.css" type="text/css"
+<link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/css/etalage.css" type="text/css"
 	media="all">
 <!--//theme-style-->
 <meta name="viewport"
@@ -23,9 +23,9 @@
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"
 	rel="stylesheet" type="text/css">
 <!--//fonts-->
-<script src="js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
 
-<script src="js/jquery.etalage.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.etalage.min.js"></script>
 <script>
 	jQuery(document)
 			.ready(
@@ -60,7 +60,7 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="index.html"><img src="images/logo.png" alt=" "></a>
+						<a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/logo.png" alt=" "></a>
 					</div>
 
 					<div class="clearfix"></div>

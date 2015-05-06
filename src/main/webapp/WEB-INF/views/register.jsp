@@ -26,11 +26,7 @@
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/"><img src="images/logo.png" alt=" "></a>
 					</div>
-					<div class="search">
-						<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-						<input type="submit" value="SEARCH">
-
-					</div>
+				
 					<div class="clearfix"> </div>
 				</div>
 				<div class="header-bottom-right">					

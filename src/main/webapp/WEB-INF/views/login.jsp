@@ -23,11 +23,7 @@
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/"><img src="images/logo.png" alt=" "></a>
 					</div>
-					<div class="search">
-						<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-						<input type="submit" value="SEARCH">
-
-					</div>
+					
 					<div class="clearfix"> </div>
 				</div>
 				<div class="header-bottom-right">					
@@ -48,7 +44,7 @@
 		
       	   <div class="account_grid">
 			   <div class=" login-right">
-			  	<h3>REGISTERED CUSTOMERS</h3>
+			  	<h3>REGISTERED USERS</h3>
 				<p>If you have an account with us, please log in.</p>
 				<form>
 				  <div>
@@ -57,7 +53,7 @@
 				  </div>
 				  <div>
 					<span>Password<label>*</label></span>
-					<input type="text"> 
+					<input type="password"> 
 				  </div>
 				  <a class="forgot" href="#">Forgot Your Password?</a>
 				  <input type="submit" value="Login">
