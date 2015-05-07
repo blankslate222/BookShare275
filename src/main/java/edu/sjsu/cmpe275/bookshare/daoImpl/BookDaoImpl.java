@@ -127,7 +127,7 @@ public class BookDaoImpl implements BookDao {
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, (id));
-		
+		System.out.println(" id = "+ id);
 		
 		data = ps.executeQuery();
 	

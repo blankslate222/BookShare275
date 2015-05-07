@@ -80,12 +80,43 @@ public class TransactionsController {
 		// order.getId());
 		return feedback;
 	}
+	@RequestMapping(value = "/offer-bid/{offer}", method = RequestMethod.POST)
+	public String offerLowerPrice(@PathVariable("offer") String offeredPrice,
+			@ModelAttribute("book") Book book,
+			BindingResult result, Model model, HttpServletRequest req) {
+		// System.out.println("lower price quoted for "+ isbn);
+		System.out.println(book.getPrice());
+		int listedPrice = Integer.parseInt(book.getPrice());
+		ModelAndView mv = new ModelAndView("BookDetail");
+		model.addAttribute("book", book);
+		String returnView =  "redirect:/details/book/"+book.getId();
+		if (listedPrice < Integer.parseInt(offeredPrice) && Integer.parseInt(offeredPrice) > 0 ) {
+			model.addAttribute("msg",
+					"Only prices lower than the listed price is accepted");
 
+		} else {
+			if (bidService.makeOffer(book, offeredPrice, ""
+					+ req.getSession().getAttribute("user")) == 1) {
+				model.addAttribute("alreadyBid", 1);
+				returnView = "redirect:/home";
+			} else {
+				model.addAttribute("msg",
+						"Bid was not accepted. Please try again later");
+			}
+		}
+		return returnView;
+	}
 	@RequestMapping(value = "details/book/{id}", method = RequestMethod.GET)
 	public ModelAndView bookDetails(@PathVariable("id") int id, Model model) {
 		ModelAndView bookDetail = new ModelAndView("BookDetail");
 		Book book = bookService.getBookById(id);
-		bookDetail.addObject("book", book);
+		if(book == null) {
+			System.out.println("book is nu;;l");
+			bookDetail = new ModelAndView("redirect:home");
+		}else{
+			bookDetail.addObject("book", book);
+		}
+		
 		return bookDetail;
 	}
 

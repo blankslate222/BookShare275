@@ -24,18 +24,18 @@ public class UserUpdateController {
 	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	private UserDaoImpl userDaoImpl;
+	//@Autowired
+	//private UserDaoImpl userDaoImpl;
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user, Model model,
 			HttpServletRequest request) throws SQLException {
-		HttpSession session = request.getSession();
+		
 		User updateUser = new User();
 		updateUser.setFirstname(user.getFirstname());
 		updateUser.setLastname(user.getLastname());
 		updateUser.setAddress(user.getAddress());
-		updateUser.setEmail("dummy@dummy.com");// dummy value(retreive email id
+		updateUser.setEmail(""+request.getSession().getAttribute("user"));// dummy value(retreive email id
 												// from session variable and set
 												// as users email
 		userDao.updateUserhbm(updateUser);// dummy value
@@ -49,7 +49,7 @@ public class UserUpdateController {
 		try {
 			mv.addObject(
 					"user",
-					userDaoImpl.getUserByEmail(""
+					userDao.getUserByEmail(""
 							+ req.getSession().getAttribute("user")));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

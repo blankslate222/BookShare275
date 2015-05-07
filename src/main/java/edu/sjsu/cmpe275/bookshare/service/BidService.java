@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.bookshare.service;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +44,11 @@ public class BidService {
 		Bid bid = new Bid();
 		int retVal = 0;
 		try {
-			if(book.getIsNegotiable().equals("Yes")){
+			if(book.getIsNegotiable().equals("yes")){
 				bid.setBidderEmail(bidderEmail);
 				bid.setBookId(book.getId());
 				bid.setOfferPrice(newOffer);
+				bid.setBidTime(Calendar.getInstance());
 				bid.setSeller(book.getUser());
 				getBidDaoImpl().insert(bid);
 				retVal = 1;

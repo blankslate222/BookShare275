@@ -41,7 +41,7 @@ public class BidDaoImpl implements BidDao{
 		String sql = "insert into bidDetails"
 				+ "(bookId, bidderEmail, offerPrice, bidTime, seller) "
 				+ " values(?,?,?,?, ?)";
-
+System.out.println(sql);
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		ps.setInt(1, bid.getBookId());
