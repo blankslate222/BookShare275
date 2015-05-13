@@ -131,4 +131,17 @@ public class OrderService {
 			
 			return orders;
 		}
+
+		
+		public List<Order> getOrdersByIsbn(String isbn) {
+			List<Order> orders = null;
+			try {
+				orders = getOrderDaoImpl().getOrdersByIsbn(isbn);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return orders;
+		}
 }

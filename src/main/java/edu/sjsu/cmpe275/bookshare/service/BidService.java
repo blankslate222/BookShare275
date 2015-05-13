@@ -60,7 +60,7 @@ public class BidService {
 		return retVal;
 	}
 	
-	public void acceptOffer(Bid bid) {
+	public Order acceptOffer(Bid bid) {
 		Book book = null;
 		Order order = null;
 		try {
@@ -72,6 +72,8 @@ public class BidService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return order;
 	}
 	
 	public List<Bid> getBid(String seller) {

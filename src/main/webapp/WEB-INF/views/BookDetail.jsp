@@ -5,8 +5,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive
-	Website Template | Product :: w3layouts</title>
+<title>Bookshare | Book details</title>
 <link href="${pageContext.request.contextPath}/css/css/bootstrap.css"
 	rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
@@ -114,24 +113,36 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="submit"></label>
 				<div class="col-md-8">
+				<c:if test="${sessionScope.user ne 'Guest' && sessionScope.user ne book.user}">
 					<c:choose>
 						<c:when test="${ book.isNegotiable == 'yes'}">
     Offer a lower price<input type="text" id="offerPrice" name="offerPrice" min="1" max="${ book.price }"/>
 <button type="submit" id="offer" name="submit"
 						onclick="return submitform(this.id)" class="btn btn-success">Make Offer</button>
 						</c:when>
-					</c:choose>
-					<button type="submit" id="buy" name="submit"
+						<c:otherwise>
+							<button type="submit" id="buy" name="submit"
 						onclick="return submitform(this.id)" class="btn btn-success">Buy</button>
-						
-					<button id="cancel" name="cancel" class="btn btn-danger">cancel</button>
+						</c:otherwise>
+					</c:choose>
+					</c:if>
+					${msg}
 				</div>
 			</div>
 
 		</fieldset>
 	</form:form>
 
-${msg}
+<div id="container">
+<h3>Reviews</h3>
+<ul>
+<c:forEach var = "review" items = "${reviews}" >
+	<li> 
+	<p>Rating: ${ review.rating } By: ${ review.buyer }</p>
+	<p>Feedback: ${ review.feedback}</p>	
+	 		</c:forEach>
+	 		</ul>
+</div>
 
 </body>
 <script type="text/javascript">

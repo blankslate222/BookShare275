@@ -111,12 +111,15 @@ public class TransactionsController {
 	public String bookDetailsById(@PathVariable("id") int id, @RequestParam(required = false) String errorMsg, Model model) {
 		String bookDetail = "BookDetail";
 		Book book = bookService.getBookById(id);
+		List<Order> reviews = null;
 		if(book == null) {
-			System.out.println("book is nu;;l");
+			System.out.println("book is null");
 			bookDetail = "redirect:/";
 		}else{
+			reviews = orderService.getOrdersByIsbn(book.getIsbn());
 			model.addAttribute("book", book);
 			model.addAttribute("msg", errorMsg);
+			model.addAttribute("reviews", reviews);
 		}
 		
 		return bookDetail;

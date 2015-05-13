@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Single :: w3layouts</title>
+<title>Bookshare | Order Summary</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -65,7 +65,7 @@
 	<!---->
 	
 	 <div class="container"> 
-	 <h3>Your Order</h3>
+	 <h3>Order Details</h3>
 	 	<table>
 	 	<tr><th>ISBN</th><th>Sold By</th><th>Price</th><th>Order Date</th></tr>
 	 	<tr><td>${ order.isbn }</td><td>${ order.seller }</td><td>${ order.price }</td><td>${order.orderDate.getTime().toString()}</td></tr>

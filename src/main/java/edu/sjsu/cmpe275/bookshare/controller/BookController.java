@@ -43,13 +43,14 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/accept-offer", method = RequestMethod.POST)
-	public ModelAndView acceptOffer(@RequestParam("bidId") int bidId,
+	public String acceptOffer(@RequestParam("bidId") int bidId,
 		 Model model, HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView("home");
+		
 		System.out.println("bid id - accepted = " + bidId);
 		Bid bid = bidService.getBidByBidId(bidId);
-		bidService.acceptOffer(bid);
-		return mv;
+		Order order = bidService.acceptOffer(bid);
+		model.addAttribute("order", order);
+		return "OrderSummary";
 	}
 
 	@RequestMapping(value = "/myoffers")

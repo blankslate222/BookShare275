@@ -170,6 +170,52 @@ System.out.println(sql + user);
 		return (orderList);
 
 	}
+	
+	public List<Order> getOrdersByIsbn(String isbn) throws SQLException {
+			// TODO Auto-generated method stub
+			Connection conn = null;
+			PreparedStatement ps = null;
+			ResultSet data = null;
+			String sql = "select * from orderBook where bookIsbn=?";
+			conn = getDataSource().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, isbn);
+
+			data = ps.executeQuery();
+			List<Order> orderList = new ArrayList<Order>();
+			Calendar c = Calendar.getInstance();
+			while (data.next()) {
+				Order newOrder = new Order();
+				newOrder.setId(data.getInt("id"));
+				newOrder.setBuyer((data.getString("buyer")));
+				newOrder.setSeller((data.getString("seller")));
+				newOrder.setFeedback(data.getString("feedback"));
+				newOrder.setRating(data.getInt("rating"));
+				c.setTime(data.getDate("orderDate"));
+				newOrder.setOrderDate(c);
+				newOrder.setIsbn(data.getString("bookIsbn"));
+				newOrder.setPrice(data.getString("price"));
+
+				orderList.add(newOrder);
+
+			}
+			System.out.println(orderList.size());
+
+			/*
+			 * int rowid = 0; if (rs.next()) { System.out.println(rs.toString());
+			 * rowid = rs.getInt(1); }
+			 */
+			try {
+				ps.close();
+				conn.close();
+				data.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return (orderList);
+
+	}
 
 	public void deleteOrderById(int id) throws SQLException {
 		Connection conn = null;
