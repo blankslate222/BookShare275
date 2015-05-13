@@ -71,7 +71,7 @@
 	 		<c:when test = "${ not empty books }">
 	 		<c:forEach var = "book" items = "${books}" >
 	 		<img src=""/>
-	 		<a href="/details/book/id/${book.id}">book.title</a>
+	 		<a href="${pageContext.request.contextPath}/details/book/id/${book.id}">${book.title}</a>
 	 		</c:forEach>
 	 		</c:when>
 	 		<c:otherwise>

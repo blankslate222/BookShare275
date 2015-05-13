@@ -65,7 +65,11 @@
 	<!---->
 	
 	 <div class="container"> 
-	 	ISBN : 
+	 <h3>Your Order</h3>
+	 	<table>
+	 	<tr><th>ISBN</th><th>Sold By</th><th>Price</th><th>Order Date</th></tr>
+	 	<tr><td>${ order.isbn }</td><td>${ order.seller }</td><td>${ order.price }</td><td>${order.orderDate.getTime().toString()}</td></tr>
+	 	</table>
 	 </div>
 	
 

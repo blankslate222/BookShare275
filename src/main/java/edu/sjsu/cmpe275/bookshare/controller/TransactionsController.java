@@ -66,15 +66,15 @@ public class TransactionsController {
 
 		book.setUser("" + req.getSession().getAttribute("user"));
 		bookService.createBookRequest(book);
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "book/purchase", method = RequestMethod.POST)
 	public String purchaseBook(@ModelAttribute("book") Book book,
 			BindingResult result, Model model, HttpServletRequest req) {
 		
-		// ""+req.getSession().getAttribute("user")
-		Order order = orderService.bookShare(book.getIsbn(), "user1");
+		String user1 = ""+req.getSession().getAttribute("user");
+		Order order = orderService.bookShare(book.getIsbn(), user1);
 		model.addAttribute("order", order);
 		// System.out.println("inserted order id in controller = "+
 		// order.getId());
@@ -85,14 +85,15 @@ public class TransactionsController {
 			@ModelAttribute("book") Book book,
 			BindingResult result, Model model, HttpServletRequest req) {
 		// System.out.println("lower price quoted for "+ isbn);
+		String message = "";
 		System.out.println(book.getPrice());
 		int listedPrice = Integer.parseInt(book.getPrice());
 		ModelAndView mv = new ModelAndView("BookDetail");
 		model.addAttribute("book", book);
-		String returnView =  "redirect:/details/book/"+book.getId();
+		String returnView =  "redirect:/details/book/id/"+book.getId();
 		if (listedPrice < Integer.parseInt(offeredPrice) && Integer.parseInt(offeredPrice) > 0 ) {
-			model.addAttribute("msg",
-					"Only prices lower than the listed price is accepted");
+			message = "Only prices lower than the listed price is accepted";
+			model.addAttribute("msg",message);
 
 		} else {
 			if (bidService.makeOffer(book, offeredPrice, ""
@@ -100,14 +101,14 @@ public class TransactionsController {
 				model.addAttribute("alreadyBid", 1);
 				returnView = "redirect:/home";
 			} else {
-				model.addAttribute("msg",
-						"Bid was not accepted. Please try again later");
+				message = "Bid was not accepted. Please try again later";
+				model.addAttribute("msg",message);
 			}
 		}
 		return returnView;
 	}
 	@RequestMapping(value = "details/book/id/{id}", method = RequestMethod.GET)
-	public String bookDetailsById(@PathVariable("id") int id, Model model) {
+	public String bookDetailsById(@PathVariable("id") int id, @RequestParam(required = false) String errorMsg, Model model) {
 		String bookDetail = "BookDetail";
 		Book book = bookService.getBookById(id);
 		if(book == null) {
@@ -115,6 +116,7 @@ public class TransactionsController {
 			bookDetail = "redirect:/";
 		}else{
 			model.addAttribute("book", book);
+			model.addAttribute("msg", errorMsg);
 		}
 		
 		return bookDetail;
@@ -184,6 +186,6 @@ public class TransactionsController {
 			bookService.clearRequest(id);
 		}
 		model.addAttribute("book", book);
-		return "SellForm";
+		return "SellBook";
 	}
 }

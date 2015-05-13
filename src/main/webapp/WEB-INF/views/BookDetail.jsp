@@ -116,7 +116,7 @@
 				<div class="col-md-8">
 					<c:choose>
 						<c:when test="${ book.isNegotiable == 'yes'}">
-    Offer a lower price<form:input type="text" id="offerPrice" name="offerPrice" path=""/>
+    Offer a lower price<input type="text" id="offerPrice" name="offerPrice" min="1" max="${ book.price }"/>
 <button type="submit" id="offer" name="submit"
 						onclick="return submitform(this.id)" class="btn btn-success">Make Offer</button>
 						</c:when>
@@ -130,9 +130,8 @@
 
 		</fieldset>
 	</form:form>
-	<% %>${msg }
 
-
+${msg}
 
 </body>
 <script type="text/javascript">

@@ -66,16 +66,17 @@
 	<!---->
 	
 	 <div class="container"> 
+	 <table>
+	 <tr><th>Book Id</th><th>Bidder</th><th>Offered Price</th></tr>
 	 	<c:forEach var="bid" items="${bids}">
-
-		${bid.id }<br>
-		${bid.bookId }<br>
-		${bid.bidderEmail }<br>
-		<form action = "${pageContext.request.contextPath}/accept-offer" method = "post">
+	<tr><td><a href="${pageContext.request.contextPath}/details/book/id/${bid.bookId }">${bid.bookId }</a></td>
+	<td>${bid.bidderEmail }</td><td>${bid.offerPrice}</td></tr>
+		<tr><td><form action = "${pageContext.request.contextPath}/accept-offer" method = "post">
 		<input type = "hidden" id = "bidId" name = "bidId" value = "${bid.id }"/>
 		<input type="submit" value="Accept"/>
-		</form>
+		</form></td></tr>
 		</c:forEach>
+		</table>
 	 	</div>
 	
 

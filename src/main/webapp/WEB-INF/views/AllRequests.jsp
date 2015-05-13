@@ -73,7 +73,7 @@
 	 		<img src=""/>
 	 		<table>
 	 		<tr><th>ISBN</th><th>Title</th><th>Price</th><th>Have the book?</th></tr>
-	 		<tr><td>${book.isbn}</td><td>${book.title}</td><td>${book.price}</td><td><a href="/fulfill-request/${book.id}">Create Listing</a></td></tr>
+	 		<tr><td>${book.isbn}</td><td>${book.title}</td><td>${book.price}</td><td><a href="${pageContext.request.contextPath}/fulfill-request/${book.id}">Create Listing</a></td></tr>
 	 		</table>
 	 		</c:forEach>
 	 		</c:when>
