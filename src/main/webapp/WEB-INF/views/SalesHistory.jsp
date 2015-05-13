@@ -3,7 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html><head>
 <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Single :: w3layouts</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
@@ -66,17 +65,25 @@
 	<!---->
 	
 	 <div class="container"> 
-	 	<c:forEach var="bid" items="${bids}">
-
-		${bid.id }<br>
-		${bid.bookId }<br>
-		${bid.bidderEmail }<br>
-		<form action = "${pageContext.request.contextPath}/accept-offer" method = "post">
-		<input type = "hidden" id = "bidId" name = "bidId" value = "${bid.id }"/>
-		<input type="submit" value="Accept"/>
-		</form>
-		</c:forEach>
-	 	</div>
+	 	 	<h3>Your sales history</h3>
+	 	<c:choose>
+		<c:when test="${ not empty history }">
+			<table>
+	 	<tr><th>Date</th><th>Purchased By</th><th>ISBN</th><th>Price</th></tr>
+	 		<c:forEach var = "purchase" items = "${history}" >
+	 		<tr>
+	 		<td>${ purchase.orderDate.getTime().toString()}</td>
+	 		<td>${ purchase.buyer }</td>
+	 		<td>${ purchase.isbn }</td>
+	 		<td>${purchase.price}</td>
+	 		</c:forEach>
+	 		</table>
+		</c:when>
+		<c:otherwise>
+			<p>No history found</p>
+		</c:otherwise>
+	</c:choose> 
+	 </div>
 	
 
 </body></html>

@@ -66,6 +66,8 @@ public class BidService {
 		try {
 			book = bookDaoImpl.getBookById(bid.getBookId());
 			order = orderService.createOrder(book, bid.getBidderEmail());
+			//bidDaoImpl.removeBidsByBookId(bid.getBookId());
+			System.out.println("offer accepted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,6 +78,18 @@ public class BidService {
 		List<Bid> bid = null;
 		try {
 			bid = getBidDaoImpl().getBidBySeller(seller);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bid;
+	}
+	
+	public Bid getBidByBidId(int bidId) {
+		Bid bid = null;
+		
+		try {
+			bid = getBidDaoImpl().getBidByBidId(bidId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

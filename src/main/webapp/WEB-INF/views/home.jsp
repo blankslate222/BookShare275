@@ -18,7 +18,7 @@
 <!--script-->
 </head>
 <body> 
-<%if(session.getAttribute("user")== null){%>
+<%if(session.getAttribute("user")== null || session.getAttribute("user").equals("Guest") ){%>
 <jsp:forward page="${pageContext.request.contextPath}"></jsp:forward>
 <%	
 } %>

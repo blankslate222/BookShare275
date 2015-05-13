@@ -37,7 +37,7 @@ public class TransactionsController {
 	private BidService bidService;
 
 	@RequestMapping(value = "sell/book")
-	public ModelAndView sellBook() {
+	public ModelAndView sellBook(Model modl) {
 		ModelAndView model = new ModelAndView("SellBook");
 		model.addObject("book", new Book());
 		return model;
@@ -50,11 +50,11 @@ public class TransactionsController {
 		book.setUser("" + req.getSession().getAttribute("user"));
 		bookService.createBook(book);
 
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "book/request")
-	public ModelAndView requestBook() {
+	public ModelAndView requestBook(Model modl) {
 		ModelAndView model = new ModelAndView("RequestBook");
 		model.addObject("book", new Book());
 		return model;
@@ -70,15 +70,15 @@ public class TransactionsController {
 	}
 
 	@RequestMapping(value = "book/purchase", method = RequestMethod.POST)
-	public ModelAndView purchaseBook(@ModelAttribute("book") Book book,
+	public String purchaseBook(@ModelAttribute("book") Book book,
 			BindingResult result, Model model, HttpServletRequest req) {
-		ModelAndView feedback = new ModelAndView("feedback");
+		
 		// ""+req.getSession().getAttribute("user")
 		Order order = orderService.bookShare(book.getIsbn(), "user1");
-		feedback.addObject("order", order);
+		model.addAttribute("order", order);
 		// System.out.println("inserted order id in controller = "+
 		// order.getId());
-		return feedback;
+		return "OrderSummary";
 	}
 	@RequestMapping(value = "/offer-bid/{offer}", method = RequestMethod.POST)
 	public String offerLowerPrice(@PathVariable("offer") String offeredPrice,
@@ -106,54 +106,84 @@ public class TransactionsController {
 		}
 		return returnView;
 	}
-	@RequestMapping(value = "details/book/{id}", method = RequestMethod.GET)
-	public ModelAndView bookDetails(@PathVariable("id") int id, Model model) {
-		ModelAndView bookDetail = new ModelAndView("BookDetail");
+	@RequestMapping(value = "details/book/id/{id}", method = RequestMethod.GET)
+	public String bookDetailsById(@PathVariable("id") int id, Model model) {
+		String bookDetail = "BookDetail";
 		Book book = bookService.getBookById(id);
 		if(book == null) {
 			System.out.println("book is nu;;l");
-			bookDetail = new ModelAndView("redirect:home");
+			bookDetail = "redirect:/";
 		}else{
-			bookDetail.addObject("book", book);
+			model.addAttribute("book", book);
 		}
 		
 		return bookDetail;
 	}
 
+//	@RequestMapping(value = "details/book/isbn/{isbn}", method = RequestMethod.GET)
+//	public String bookDetailsByIsbn(@PathVariable("isbn") String isbn, Model model) {
+//		String bookDetail = "BookDetail";
+//		Book book = bookService.getBookByIsbn(isbn);
+//		if(book == null) {
+//			System.out.println("book is null");
+//			bookDetail = "redirect:/";
+//		}else{
+//			model.addAttribute("book", book);
+//		}
+//		
+//		return bookDetail;
+//	}
+	
+	@RequestMapping(value = "/update-feedback/{id}")
+	public String feedBackForm(@PathVariable("id") String orderId, Model model) {
+		System.out.println(" in feedback ");
+			if( "".equals(orderId )) {
+				model.addAttribute("order", null);
+				return "feedback";
+			}
+			Order order = orderService.getOrderById(Integer.parseInt(orderId));
+			
+			if(order == null) {
+				model.addAttribute("order", order);
+				return "feedback";
+			}
+			
+			model.addAttribute("order", order);
+		return "feedback";
+	}
 	@RequestMapping(value = "update-feedback", method = RequestMethod.POST)
 	public String updateFeedback(@ModelAttribute("order") Order order,
 			BindingResult result, Model model) {
 		// System.out.println(order.getFeedback()+order.getId());
 		orderService.updateOrder(order);
-		return "redirect:/";
+		return "redirect:/history/purchase";
+	}
+	
+	@RequestMapping(value = "/book/all")
+	public String displayAvailableBooks(Model model) {
+		List<Book> availableBooks = bookService.getAvailableBooks();
+		model.addAttribute("books", availableBooks);
+		return "AllBooks";
 	}
 
-	@RequestMapping(value = "my-transactions", method = RequestMethod.GET)
-	public ModelAndView getMyTransactions(Model model, HttpServletRequest req) {
-		ModelAndView mv = null;
-		List<Order> mySales = null;
-		List<Order> myPurchases = null;
-		List<Book> myBooks = null;
-		try {
-			mv = new ModelAndView("MyTransactions");
-			mySales = orderService.getOrderDaoImpl().getOrderBySeller(
-					"" + req.getSession().getAttribute("user"));
-			myPurchases = orderService.getOrderDaoImpl().getOrderByBuyer(
-					"" + req.getSession().getAttribute("user"));
-			myBooks = bookService.getBookDaoImpl().getBookByUser(
-					"" + req.getSession().getAttribute("user"));
-			
-
-			mv.addObject("mySales",mySales);
-			mv.addObject("myPurchases",myPurchases);
-			mv.addObject("myBooks",myBooks);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			mv = new ModelAndView("home");
+	@RequestMapping(value = "/requests")
+	public String displayBookRequests(Model model) {
+		List<Book> requestedBooks = bookService.getRequestedBooks();
+		model.addAttribute("books", requestedBooks);
+		return "AllRequests";
+	}
+	
+	@RequestMapping(value = "/fulfill-request/{id}")
+	public String fulfillRequest(@PathVariable("id") int id, Model model) {
+		Book book = null;
+		book = bookService.getRequestedBook(id);
+		
+		if( book == null ) {
+			return "redirect:/requests";
+		}else{
+			bookService.clearRequest(id);
 		}
-		return mv;
-
+		model.addAttribute("book", book);
+		return "SellForm";
 	}
-
 }

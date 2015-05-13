@@ -14,6 +14,6 @@ public interface BidDao {
 	public Bid getBidByBidderEmail(String bidderEmail) throws SQLException;
 	
 	//remove all records after a book is ordered
-	public void removeBidsByListingId(int listingId) throws SQLException;
+	public void removeBidsByBookId(int listingId) throws SQLException;
 	
 }

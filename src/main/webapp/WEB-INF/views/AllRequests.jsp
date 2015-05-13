@@ -66,16 +66,22 @@
 	<!---->
 	
 	 <div class="container"> 
-	 	<c:forEach var="bid" items="${bids}">
-
-		${bid.id }<br>
-		${bid.bookId }<br>
-		${bid.bidderEmail }<br>
-		<form action = "${pageContext.request.contextPath}/accept-offer" method = "post">
-		<input type = "hidden" id = "bidId" name = "bidId" value = "${bid.id }"/>
-		<input type="submit" value="Accept"/>
-		</form>
-		</c:forEach>
+	 	<h3>Pending Book Requests</h3>
+	 	<c:choose>
+	 		<c:when test = "${ not empty books }">
+	 		<c:forEach var = "book" items = "${books}" >
+	 		<img src=""/>
+	 		<table>
+	 		<tr><th>ISBN</th><th>Title</th><th>Price</th><th>Have the book?</th></tr>
+	 		<tr><td>${book.isbn}</td><td>${book.title}</td><td>${book.price}</td><td><a href="/fulfill-request/${book.id}">Create Listing</a></td></tr>
+	 		</table>
+	 		</c:forEach>
+	 		</c:when>
+	 		<c:otherwise>
+	 		No books requests pending right now
+	 		</c:otherwise>
+	 	</c:choose>
+	
 	 	</div>
 	
 

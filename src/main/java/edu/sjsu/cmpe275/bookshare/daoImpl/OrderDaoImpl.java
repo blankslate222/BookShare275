@@ -50,6 +50,7 @@ public class OrderDaoImpl implements OrderDao {
 		ps.setInt(4, order.getRating());
 		ps.setTimestamp(5,
 				new Timestamp(order.getOrderDate().getTimeInMillis()));
+		
 		ps.setString(6, order.getIsbn());
 		ps.setString(7, order.getPrice());
 
@@ -114,12 +115,12 @@ System.out.println("row id in order dao impl = "+rowid);
 	}
 
 	public List<Order> getOrderBySeller(String seller) throws SQLException {
-		String sql = "select * from book where seller=?";
+		String sql = "select * from orderBook where seller=?";
 		return getOrderByUser(seller, sql);
 	}
 
 	public List<Order> getOrderByBuyer(String buyer) throws SQLException {
-		String sql = "select * from book where buyer=?";
+		String sql = "select * from orderBook where buyer=?";
 		return getOrderByUser(buyer, sql);
 	}
 
@@ -129,7 +130,7 @@ System.out.println("row id in order dao impl = "+rowid);
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet data = null;
-
+System.out.println(sql + user);
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, user);
@@ -152,6 +153,7 @@ System.out.println("row id in order dao impl = "+rowid);
 			orderList.add(newOrder);
 
 		}
+		System.out.println(orderList.size());
 
 		/*
 		 * int rowid = 0; if (rs.next()) { System.out.println(rs.toString());

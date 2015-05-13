@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.sjsu.cmpe275.bookshare.model.Bid;
 import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.Listing;
+import edu.sjsu.cmpe275.bookshare.model.Order;
 import edu.sjsu.cmpe275.bookshare.service.BidService;
 import edu.sjsu.cmpe275.bookshare.service.BookService;
+import edu.sjsu.cmpe275.bookshare.service.OrderService;
 
 @Controller
 public class BookController {
@@ -28,6 +30,9 @@ public class BookController {
 	@Autowired
 	private BidService bidService;
 
+	@Autowired
+	private OrderService orderService;
+	
 	public BookService getBookService() {
 		return bookService;
 	}
@@ -37,11 +42,12 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-
 	@RequestMapping(value = "/accept-offer", method = RequestMethod.POST)
-	public ModelAndView acceptOffer(@ModelAttribute("bid") Bid bid,
-			BindingResult result, Model model, HttpServletRequest req) {
+	public ModelAndView acceptOffer(@RequestParam("bidId") int bidId,
+		 Model model, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("home");
+		System.out.println("bid id - accepted = " + bidId);
+		Bid bid = bidService.getBidByBidId(bidId);
 		bidService.acceptOffer(bid);
 		return mv;
 	}
@@ -51,6 +57,27 @@ public class BookController {
 		ModelAndView mv = new ModelAndView("bidList");
 		List<Bid> myBids = bidService.getBid(""+req.getSession().getAttribute("user"));
 		mv.addObject("bids", myBids);
+		System.out.println("my bids" + myBids.size());
 		return mv;
+	}
+	
+	@RequestMapping(value = "/history/purchase")
+	public String purchaseHistory(Model model, HttpServletRequest req) {
+		String user = ""+req.getSession().getAttribute("user");
+		System.out.println(" user in session " + user);
+		List<Order> purchaseHistory = orderService.getOrdersByBuyer(user);
+		System.out.println("in contrlr " + purchaseHistory.size());
+		model.addAttribute("history", purchaseHistory);
+		return "PurchaseHistory";
+	}
+	
+	@RequestMapping(value = "/history/sales")
+	public String salesHistory(Model model, HttpServletRequest req) {
+		String user = ""+req.getSession().getAttribute("user");
+		System.out.println(" user in session " + user);
+		List<Order> salesHistory = orderService.getOrdersBySeller(user);
+		System.out.println("in contrlr " + salesHistory.size());
+		model.addAttribute("history", salesHistory);
+		return "SalesHistory";
 	}
 }

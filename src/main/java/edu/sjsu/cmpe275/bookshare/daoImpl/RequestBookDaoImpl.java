@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -85,5 +87,85 @@ public class RequestBookDaoImpl {
 		
 		return;
 		
+	}
+	
+	public List<Book> getRequests() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from requestBook";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		
+		List<Book> reqList = new ArrayList<Book>();
+		
+		data = ps.executeQuery();
+		while(data.next()){
+		Book newBook = new Book();
+		newBook.setId((data.getInt("id")));
+		newBook.setIsbn((data.getString("isbn")));
+		newBook.setTitle(data.getString("title"));
+		newBook.setDescription(data.getString("description"));
+		newBook.setCondition(data.getString("book_condition"));
+		newBook.setPrice(data.getString("price"));
+		newBook.setAuthor(data.getString("author"));
+		newBook.setUser(data.getString("requestingUser"));
+		reqList.add(newBook);
+		}
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return reqList;
+	}
+	
+	public Book getRequestedBookByRequestId(int id) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		Book newBook = null;
+		String sql = "select * from requestBook where id = ?";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, id);
+		
+		data = ps.executeQuery();
+		if(data.next()){
+		newBook = new Book();
+		newBook.setId((data.getInt("id")));
+		newBook.setIsbn((data.getString("isbn")));
+		newBook.setTitle(data.getString("title"));
+		newBook.setDescription(data.getString("description"));
+		newBook.setCondition(data.getString("book_condition"));
+		newBook.setPrice(data.getString("price"));
+		newBook.setAuthor(data.getString("author"));
+		newBook.setUser(data.getString("requestingUser"));
+		
+		}
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return newBook;
 	}
 }

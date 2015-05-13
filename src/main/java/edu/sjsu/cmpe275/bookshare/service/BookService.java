@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.bookshare.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,18 @@ public class BookService {
 		}
 	}
 
+	public List<Book> getAvailableBooks() {
+		
+		List<Book> availableBooks = null;
+		try {
+			availableBooks = getBookDaoImpl().getAvailableBooks();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return availableBooks;
+	}
 	public Book getBookById(int id) {
 		Book book = null;
 		try {
@@ -63,11 +76,52 @@ public class BookService {
 		return book;
 	}
 
+	public Book getBookByIsbn(String isbn) {
+		Book book = null;
+		try {
+			book = getBookDaoImpl().getBookByIsbn(isbn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return book;
+	}
+	
 	public void createBookRequest(Book book) {
 		try {
 			reqBookDaoImpl.createBookRequest(book);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Book> getRequestedBooks() {
+		List<Book> requestedBooks = null;
+		try {
+			requestedBooks = reqBookDaoImpl.getRequests();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return requestedBooks;
+	}
+	
+	public Book getRequestedBook(int id) {
+		Book book = null;
+		try {
+			book = reqBookDaoImpl.getRequestedBookByRequestId(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return book;
+	}
+	
+	public void clearRequest(int id) {
+		try{
+			reqBookDaoImpl.deleteBookRequestById(id);
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

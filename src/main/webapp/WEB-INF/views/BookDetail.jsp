@@ -37,7 +37,7 @@
 				<div class="header-bottom-left">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}"><img
-							src="images/logo.png" alt=" "></a>
+							src="${pageContext.request.contextPath}/images/logo.png" alt=" "></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -85,10 +85,15 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="isbn"></label>
 				<div class="col-md-5">
+				<img
+							src="${pageContext.request.contextPath}/images/bag.jpg" alt=" "><br>
 					<form:input path="isbn" id="isbn" name="isbn" type="hidden"
 						placeholder="" class="form-control input-md" required="" />
-					${book.title} ${book.description} ${book.condition} ${book.price}
-					${book.author}
+					Title:${book.title}<br> 
+					Description:${book.description}<br>
+					Condition: ${book.condition} <br>
+					Price :${book.price}<br>
+					Author: ${book.author}<br>
 						<form:input path="title" id="title" name="title" type="hidden"
 						placeholder="" class="form-control input-md" required="" />
 							<form:input path="description" id="description" name="description" type="hidden"

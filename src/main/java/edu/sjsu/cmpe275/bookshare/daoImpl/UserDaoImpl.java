@@ -98,7 +98,7 @@ public class UserDaoImpl implements UserDao {
 		if(data.next())
 		{
 			user.setEmail(data.getString("email"));
-			user.setPassword(data.getString("pasword"));
+			user.setPassword(data.getString("password"));
 			user.setFirstname(data.getString("firstname"));
 			user.setLastname(data.getString("lastname"));
 			user.setAddress(data.getString("address"));

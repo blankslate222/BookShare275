@@ -128,6 +128,7 @@ System.out.println(sql);
 		data = ps.executeQuery();
 		Bid bidData = new Bid();
 		Calendar c = Calendar.getInstance();
+		if(data.next()){
 		bidData.setBidderEmail(data.getString("bidderEmail"));
 		c.setTime(data.getDate("bidTime"));
 		bidData.setBidTime(c);
@@ -135,7 +136,7 @@ System.out.println(sql);
 		bidData.setBookId(data.getInt("bookId"));
 		bidData.setOfferPrice(data.getString("offerPrice"));
 		bidData.setSeller(data.getString("seller"));
-		
+		}
 		/*int rowid = 0;
 		if (rs.next()) {
 			System.out.println(rs.toString());
@@ -154,15 +155,59 @@ System.out.println(sql);
 //		return null;
 	}
 
-	public void removeBidsByListingId(int listingId) throws SQLException {
+	public Bid getBidByBidId(int bidId) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "DELETE from bidDetails where bidderEmail=?";
+		ResultSet data = null;
+		String sql = "select * from bidDetails where id=?";
 
 		conn = getDataSource().getConnection();
 		ps = conn.prepareStatement(sql);
-		ps.setInt(1, listingId);
+		ps.setInt(1, bidId);
+		
+		
+		data = ps.executeQuery();
+		Bid bidData = new Bid();
+		Calendar c = Calendar.getInstance();
+		
+		if(data.next()){
+		bidData.setBidderEmail(data.getString("bidderEmail"));
+		c.setTime(data.getDate("bidTime"));
+		bidData.setBidTime(c);
+		bidData.setId(data.getInt("id"));
+		bidData.setBookId(data.getInt("bookId"));
+		bidData.setOfferPrice(data.getString("offerPrice"));
+		bidData.setSeller(data.getString("seller"));
+		}
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return (bidData);
+
+//		return null;
+	}
+	public void removeBidsByBookId(int bookId) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "delete from bidDetails where bookId = " + bookId;
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		//ps.setInt(1, bookId);
+		System.out.println(sql + bookId);
+	
 		ps.executeUpdate(sql);
 		try {
 			ps.close();

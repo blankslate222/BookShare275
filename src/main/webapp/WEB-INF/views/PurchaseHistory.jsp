@@ -3,9 +3,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html><head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Single :: w3layouts</title>
+<title>Share | Purchase history</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -66,17 +65,35 @@
 	<!---->
 	
 	 <div class="container"> 
-	 	<c:forEach var="bid" items="${bids}">
-
-		${bid.id }<br>
-		${bid.bookId }<br>
-		${bid.bidderEmail }<br>
-		<form action = "${pageContext.request.contextPath}/accept-offer" method = "post">
-		<input type = "hidden" id = "bidId" name = "bidId" value = "${bid.id }"/>
-		<input type="submit" value="Accept"/>
-		</form>
-		</c:forEach>
-	 	</div>
+	 	<h3>Your purchase history</h3>
+	
+	
+		<c:choose>
+		<c:when test="${ not empty history }">
+			<table>
+	 	<tr><th>Date</th><th>Sold By</th><th>ISBN</th><th>Price</th><th>Feedback</th></tr>
+	 		<c:forEach var = "purchase" items = "${history}" >
+	 		<tr>
+	 		<td>${ purchase.orderDate.getTime().toString()}</td>
+	 		<td>${ purchase.seller }</td>
+	 		<td>${ purchase.isbn }</td>
+	 		<td>${purchase.price}</td>
+	 		<c:if test="${empty purchase.feedback}">
+	 		<td><a href="${pageContext.request.contextPath}/update-feedback/${ purchase.id }">Rate</a></td>
+	 		</c:if>
+	 		<c:if test="${not empty purchase.feedback}">
+	 		<td>Thank you</td>
+	 		</c:if>
+	 		</c:forEach>
+	 		</table>
+		</c:when>
+		<c:otherwise>
+			<p>No history found</p>
+		</c:otherwise>
+	</c:choose> 
+	
+	 	
+	 </div>
 	
 
 </body></html>

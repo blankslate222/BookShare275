@@ -73,7 +73,48 @@ public class BookDaoImpl implements BookDao {
 		return (rowid);
 	}
 
-	
+	public List<Book> getAvailableBooks() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet data = null;
+		String sql = "select * from book where book_status = 'available'";
+
+		conn = getDataSource().getConnection();
+		ps = conn.prepareStatement(sql);
+		
+		List<Book> bookList = new ArrayList<Book>();
+		
+		data = ps.executeQuery();
+		while(data.next()){
+		Book newBook = new Book();
+		newBook.setId((data.getInt("id")));
+		newBook.setIsbn((data.getString("isbn")));
+		newBook.setTitle(data.getString("title"));
+		newBook.setDescription(data.getString("description"));
+		newBook.setCondition(data.getString("book_condition"));
+		newBook.setPrice(data.getString("price"));
+		newBook.setAuthor(data.getString("author"));
+		newBook.setStatus(data.getString("book_status"));
+		newBook.setUser((data.getString("user")));
+		newBook.setIsNegotiable((data.getString("isNegotiable")));
+		bookList.add(newBook);
+		}
+		/*int rowid = 0;
+		if (rs.next()) {
+			System.out.println(rs.toString());
+			rowid = rs.getInt(1);
+		}*/
+		try {
+			ps.close();
+			conn.close();
+			data.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return bookList;
+
+	}
 	public Book getBookByIsbn(String isbn) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection conn = null;

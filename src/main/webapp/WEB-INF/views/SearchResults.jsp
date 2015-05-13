@@ -97,13 +97,13 @@
 			<ul>
 				<c:forEach var="buk" items="${books}">
 					<img src="${pageContext.request.contextPath}/images/wat.gif"/>
-					<li><a href="${pageContext.request.contextPath}/details/book/${buk.id}">${buk.title}</a></li>
+					<li><a href="${pageContext.request.contextPath}/details/book/id/${buk.id}">${buk.title}</a></li>
 				</c:forEach>
 			</ul>
 		</c:when>
 		<c:when test="${not empty book }">
 		<img src=""/>
-		<a href="${pageContext.request.contextPath}/details/book/${book.id}">${book.title}</a>
+		<a href="${pageContext.request.contextPath}/details/book/id/${book.id}">${book.title}</a>
 		</c:when>
 		<c:otherwise>
 			<p>No matches found</p>
