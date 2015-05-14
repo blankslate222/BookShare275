@@ -20,7 +20,23 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
 	<context:component-scan base-package="package edu.sjsu.cmpe275.bookshare.controller" />
 	<mvc:annotation-driven />
 	<aop:aspectj-autoproxy /> 
-	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<property name="host" value="smtp.gmail.com" />
+	<property name="port" value="587" />
+	<property name="username" value="bookshare275@gmail.com" />
+	<property name="password" value="Bookshare.275" />
+ 
+	<property name="javaMailProperties">
+	   <props>
+       	      <prop key="mail.smtp.auth">true</prop>
+       	      <prop key="mail.smtp.starttls.enable">true</prop>
+       	   </props>
+	</property>
+</bean>
+ 
+<bean id="mailMail" class="edu.sjsu.cmpe275.bookshare.utils.MailNotification">
+	<property name="mailSender" ref="mailSender" />
+</bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

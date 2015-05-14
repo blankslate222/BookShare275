@@ -19,6 +19,7 @@ import edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.User;
 import edu.sjsu.cmpe275.bookshare.service.BookService;
+import edu.sjsu.cmpe275.bookshare.utils.MailNotification;
 
 @Controller
 public class UserController {
@@ -26,82 +27,95 @@ public class UserController {
 	private UserDao userDao;
 	@Autowired
 	private BookService bookService;
-	@RequestMapping(value="/register")
+	@Autowired
+	private MailNotification mailMail;
+
+	@RequestMapping(value = "/register")
 	public ModelAndView newUser(Model modl) {
 		ModelAndView model = new ModelAndView("register");
 		model.addObject("user", new User());
-		return model;		
+		return model;
 	}
-/*	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
-		userDao.createUserhbm(user);
-		return new ModelAndView("redirect:/");
-	}*/
+
+	/*
+	 * @RequestMapping(value = "/save", method = RequestMethod.POST) public
+	 * ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
+	 * userDao.createUserhbm(user); return new ModelAndView("redirect:/"); }
+	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
-		if(userDao.createUserhbm(user)=="success")
-		{
-		return new ModelAndView("redirect:/");
-		}
-		else{
-			String message ="username exists";
-			return new ModelAndView("redirect:/register","message",message);
+		if (userDao.createUserhbm(user) == "success") {
+			mailMail.sendMail(
+					"bookshare275@gmail.com",
+					user.getEmail(),
+					"Registration",
+					"Congratulations you have successfully "
+							+ "registered on our website.Enjoy BookSharing. \n\n Thank you \n regards\n Bookshare.inc");
+			return new ModelAndView("redirect:/");
+		} else {
+			String message = "username exists";
+			return new ModelAndView("redirect:/register", "message", message);
 		}
 	}
-	@RequestMapping(value="/")
+
+	@RequestMapping(value = "/")
 	public ModelAndView home(Model modl) {
 		ModelAndView model = new ModelAndView("index");
-		//model.addObject("user", new User());
-		return model;		
+		// model.addObject("user", new User());
+		return model;
 	}
-	@RequestMapping(value="/login")
+
+	@RequestMapping(value = "/login")
 	public ModelAndView login(Model modl) {
 		ModelAndView model = new ModelAndView("login");
 		model.addObject("user", new User());
-		return model;		
+		return model;
 	}
-	@RequestMapping(value="/signin",method = RequestMethod.POST)
-	public ModelAndView logincheck(@ModelAttribute User user,HttpServletRequest req) {
-		  System.out.println("login method called");
-		  String email=user.getEmail();  
-	      String password=user.getPassword();  
-	      System.out.println("email"+email);
-	      if(userDao.get(email, password)!=null)
-	      {
-	    	  System.out.println("success");
-	    	  req.getSession().setAttribute("user",email);
-	    	  return new ModelAndView("redirect:/home");
-	    	  
-	      }
-	      else
-	      {
-	    	  System.out.println("fail");
-	    	  String message="Invalid login credentials";
-	    	  return new ModelAndView("redirect:/login","message",message);
-	    	  
-	      }
+
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public ModelAndView logincheck(@ModelAttribute User user,
+			HttpServletRequest req) {
+		System.out.println("login method called");
+		String email = user.getEmail();
+		String password = user.getPassword();
+		System.out.println("email" + email);
+		if (userDao.get(email, password) != null) {
+			System.out.println("success");
+			req.getSession().setAttribute("user", email);
+			return new ModelAndView("redirect:/home");
+
+		} else {
+			System.out.println("fail");
+			String message = "Invalid login credentials";
+			return new ModelAndView("redirect:/login", "message", message);
+
+		}
 	}
-	@RequestMapping(value="/home")
+
+	@RequestMapping(value = "/home")
 	public ModelAndView userhome(Model modl) {
 		ModelAndView model = new ModelAndView("home");
-		//model.addObject("user", new User());
-		return model;		
+		// model.addObject("user", new User());
+		return model;
 	}
-	@RequestMapping(value="/useraccount")
+
+	@RequestMapping(value = "/useraccount")
 	public ModelAndView useraccount(Model modl, HttpServletRequest req) {
 		ModelAndView model = new ModelAndView("userAccount");
-		//model.addObject("user", new User());
+		// model.addObject("user", new User());
 		List<Book> myBooks = null;
-		myBooks = bookService.getBooksByUser(""+req.getSession().getAttribute("user"));
+		myBooks = bookService.getBooksByUser(""
+				+ req.getSession().getAttribute("user"));
 		System.out.println("books size = " + myBooks.size());
 		model.addObject("books", myBooks);
-		return model;		
+		return model;
 	}
-	@RequestMapping(value="/allrequestedbooks")
+
+	@RequestMapping(value = "/allrequestedbooks")
 	public ModelAndView allrequestedbooks(Model modl) {
 		ModelAndView model = new ModelAndView("allRequested");
-		//model.addObject("user", new User());
-		return model;		
+		// model.addObject("user", new User());
+		return model;
 	}
-	
+
 }
