@@ -107,6 +107,17 @@ public class BookService {
 		return requestedBooks;
 	}
 	
+	public List<Book> getBooksByUser(String user) {
+		List<Book> myBooks = null;
+		try {
+			myBooks = bookDaoImpl.getBookByUser(user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return myBooks;
+	}
+	
 	public Book getRequestedBook(int id) {
 		Book book = null;
 		try {

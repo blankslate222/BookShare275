@@ -4,10 +4,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html><head>
+<<<<<<< Updated upstream
 <title>Bookshare | Order Summary</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+=======
+<title>BOOKSHARE | ORDER SUMMARY</title>
+<link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+>>>>>>> Stashed changes
 <!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all">	
+<link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">	
 <link rel="stylesheet" href="css/etalage.css" type="text/css" media="all">
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,9 +20,9 @@
 <!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <!--//fonts-->
-<script src="js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
 
-<script src="js/jquery.etalage.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.etalage.min.js"></script>
 <script>
 			jQuery(document).ready(function($){
 
@@ -50,11 +55,11 @@
 					<div class="clearfix"> </div>
 				</div>
 				<div class="header-bottom-right">					
-						<div class="account"><a href=""><span> </span>YOUR ACCOUNT</a></div>
-							<ul class="login"><li><a href="">SELL</a></li> | <li><a href="">REQUEST</a></li></ul>
+						<div class="account"><a href="${pageContext.request.contextPath}/useraccount"><span> </span>YOUR ACCOUNT</a></div>
+							<ul class="login"><li><a href="${pageContext.request.contextPath}/sell/book">SELL</a></li> | <li><a href="${pageContext.request.contextPath}/book/request">REQUEST</a></li></ul>
 
 
-<ul class="login"><li><a href="">LOGOUT</a></li> | <li><a href="">ADs</a></li><li><a href="">ADVANCE SEARCH</a></li></ul>
+<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
 						
 					<div class="clearfix"> </div>
 				</div>

@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.bookshare.dao.UserDao;
+import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
 import edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl;
+import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.User;
+import edu.sjsu.cmpe275.bookshare.service.BookService;
 
 @Controller
 public class UserController {
 	@Autowired
 	private UserDao userDao;
-	
+	@Autowired
+	private BookService bookService;
 	@RequestMapping(value="/register")
 	public ModelAndView newUser(Model modl) {
 		ModelAndView model = new ModelAndView("register");
@@ -84,9 +88,13 @@ public class UserController {
 		return model;		
 	}
 	@RequestMapping(value="/useraccount")
-	public ModelAndView useraccount(Model modl) {
+	public ModelAndView useraccount(Model modl, HttpServletRequest req) {
 		ModelAndView model = new ModelAndView("userAccount");
 		//model.addObject("user", new User());
+		List<Book> myBooks = null;
+		myBooks = bookService.getBooksByUser(""+req.getSession().getAttribute("user"));
+		System.out.println("books size = " + myBooks.size());
+		model.addObject("books", myBooks);
 		return model;		
 	}
 	@RequestMapping(value="/allrequestedbooks")

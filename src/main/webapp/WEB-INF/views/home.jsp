@@ -39,7 +39,7 @@
 							<ul class="login"><li><a href="${pageContext.request.contextPath}/sell/book">SELL</a></li> | <li><a href="${pageContext.request.contextPath}/book/request">REQUEST</a></li></ul>
 
 
-<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/allrequestedbooks">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li></ul>
+<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
 						
 					<div class="clearfix"> </div>
 				</div>
@@ -129,9 +129,9 @@
 					<div class=" chain-grid menu-chain">
 	   		     		<a href=""><img class="img-responsive chain" src="images/wat.gif" alt=" "></a>	   		     		
 	   		     		<div class="grid-chain-bottom chain-watch">
-		   		     		<span class="actual dolor-left-grid">300$</span>
-		   		     		<span class="reducedfrom">500$</span>  
-		   		     		<h6>Lorem ipsum dolor</h6>  		     			   		     										
+		   		     		<span class="actual dolor-left-grid">30$</span>
+		   		     		<span class="reducedfrom">50$</span>  
+		   		     		<h6>Operating Systems</h6>  		     			   		     										
 	   		     		</div>
 	   		     	</div>
 	   		     		

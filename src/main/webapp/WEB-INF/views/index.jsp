@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <html><head>
 <title>BOOKSHARE | Home </title>
+<meta name="google-translate-customization" content="73a9f199c058d191-1e0a3cb3147c5dea-g1e2554092da0d1b9-23"></meta>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
@@ -34,7 +36,12 @@
 								<li><a href="login"><span> </span>LOGIN</a></li> |
 								<li><a href="register">SIGNUP</a></li>
 							</ul>
-						
+					<div class="g-plus" data-action="share"></div>	<br>
+					<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 					<div class="clearfix"> </div>
 				</div>
 				<div class="clearfix"> </div>	

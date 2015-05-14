@@ -6,9 +6,9 @@
 
 <html><head>
 <title>Bookshare | Available Books</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 <!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all">	
+<link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">	
 <link rel="stylesheet" href="css/etalage.css" type="text/css" media="all">
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,9 +16,9 @@
 <!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 <!--//fonts-->
-<script src="js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
 
-<script src="js/jquery.etalage.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/js/jquery.etalage.min.js"></script>
 <script>
 			jQuery(document).ready(function($){
 
@@ -45,17 +45,17 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="index.html"><img src="images/logo.png" alt=" "></a>
+						<a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/logo.png" alt=" "></a>
 					</div>
 					
 					<div class="clearfix"> </div>
 				</div>
 				<div class="header-bottom-right">					
-						<div class="account"><a href=""><span> </span>YOUR ACCOUNT</a></div>
-							<ul class="login"><li><a href="">SELL</a></li> | <li><a href="">REQUEST</a></li></ul>
+						<div class="account"><a href="${pageContext.request.contextPath}/useraccount"><span> </span>YOUR ACCOUNT</a></div>
+							<ul class="login"><li><a href="${pageContext.request.contextPath}/sell/book">SELL</a></li> | <li><a href="${pageContext.request.contextPath}/book/request">REQUEST</a></li></ul>
 
 
-<ul class="login"><li><a href="">LOGOUT</a></li> | <li><a href="">ADs</a></li><li><a href="">ADVANCE SEARCH</a></li></ul>
+<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
 						
 					<div class="clearfix"> </div>
 				</div>
@@ -70,8 +70,8 @@
 	 	<c:choose>
 	 		<c:when test = "${ not empty books }">
 	 		<c:forEach var = "book" items = "${books}" >
-	 		<img src=""/>
-	 		<a href="${pageContext.request.contextPath}/details/book/id/${book.id}">${book.title}</a>
+	 		<img src="${pageContext.request.contextPath}/images/wat.gif"/><br>
+	 		<a href="${pageContext.request.contextPath}/details/book/id/${book.id}">${book.title}</a><br>
 	 		</c:forEach>
 	 		</c:when>
 	 		<c:otherwise>

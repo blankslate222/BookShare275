@@ -5,7 +5,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title>Search Results</title>
+<title>BOOKSHARE | Search Results</title>
 <link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css"
 	media="all">
 <!--theme-style-->
