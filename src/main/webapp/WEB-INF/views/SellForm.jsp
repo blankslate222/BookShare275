@@ -26,8 +26,7 @@
       <a class="navbar-brand" href="#">Bookshare</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-  </div><!-- /.container-fluid -->
+  </div>
 </nav>
 <div class="background"></div>
 <div class="content">

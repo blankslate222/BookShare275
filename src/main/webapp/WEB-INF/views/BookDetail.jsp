@@ -5,32 +5,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-
-
-
 <title>BOOKSHARE | DETAILS</title>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<link href="${pageContext.request.contextPath}/css/css/bootstrap.css"
-	rel="stylesheet" type="text/css" media="all">
-<!--theme-style-->
-<link href="${pageContext.request.contextPath}/css/css/style.css"
-	rel="stylesheet" type="text/css" media="all">
-<!--//theme-style-->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript">
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
-<!--fonts-->
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"
-	rel="stylesheet" type="text/css">
-<!--//fonts-->
-<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
 
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
 <meta name="google-translate-customization" content="832e45d6fb214c99-b714140db595e3d8-g484b20115371f2a3-24"></meta>
-<!--script-->
+
 </head>
 <body>
 	<!--header-->
@@ -52,7 +39,7 @@
 
 
 <ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
-			<ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
+			
 								<ul><li><div id="google_translate_element"></div><script type="text/javascript">
 function googleTranslateElementInit() {
  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -74,8 +61,8 @@ function googleTranslateElementInit() {
 		<form:hidden path="id" />
 		<fieldset>
 
-			<!-- Form Name -->
-			<legend>Share Book</legend>
+			
+			<legend>Book Deatils</legend>
 
 
 			<div class="form-group">

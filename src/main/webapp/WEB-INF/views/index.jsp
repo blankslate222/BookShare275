@@ -1,24 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<html><head>
+<html>
+<head>
 <title>BOOKSHARE | Home </title>
 <meta name="google-translate-customization" content="73a9f199c058d191-1e0a3cb3147c5dea-g1e2554092da0d1b9-23"></meta>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
-<!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-<!--//fonts-->
 <script src="js/js/jquery.min.js"></script>
-<!--script-->
 </head>
 <body> 
 <%session.invalidate(); %>
-	<!--header-->
+
 	<div class="header">
 		
 		<div class="bottom-header">
@@ -48,7 +44,7 @@ function googleTranslateElementInit() {
 			</div>
 		</div>
 	</div>
-	<!---->
+
 	<div class="container">
 			<div class="shoes-grid">
 			<a href="single.html">
@@ -230,4 +226,5 @@ function googleTranslateElementInit() {
   ga('send', 'pageview');
 
 </script>
-</body></html>
+</body>
+</html>
