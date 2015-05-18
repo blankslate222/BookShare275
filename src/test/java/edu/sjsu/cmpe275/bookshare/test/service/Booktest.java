@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.bookshare.test.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.sjsu.cmpe275.bookshare.model.Book;
@@ -23,7 +25,12 @@ public class Booktest {
 			book.setIsbn("1234");
 			book.setTitle("mytitle");
 			book.setUser("user1");
-			bookService.createBook(book);		
+			try {
+				bookService.createBook(book);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
 	
 		

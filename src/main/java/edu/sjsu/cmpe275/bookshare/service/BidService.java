@@ -65,6 +65,7 @@ public class BidService {
 		Order order = null;
 		try {
 			book = bookDaoImpl.getBookById(bid.getBookId());
+			book.setPrice(bid.getOfferPrice());
 			order = orderService.createOrder(book, bid.getBidderEmail());
 			//bidDaoImpl.removeBidsByBookId(bid.getBookId());
 			System.out.println("offer accepted");

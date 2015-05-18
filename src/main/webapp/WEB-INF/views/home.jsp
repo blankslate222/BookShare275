@@ -14,6 +14,7 @@
 <!--//fonts-->
 <script src="js/js/jquery.min.js"></script>
 
+<meta name="google-translate-customization" content="832e45d6fb214c99-b714140db595e3d8-g484b20115371f2a3-24"></meta>
 
 <!--script-->
 </head>
@@ -40,7 +41,11 @@
 
 
 <ul class="login"><li><a href="${pageContext.request.contextPath}">LOGOUT</a></li> | <li><a href="${pageContext.request.contextPath}/requests">ADs</a></li><li><a href="${pageContext.request.contextPath}/search">ADVANCE SEARCH</a></li>| <li><a href="${pageContext.request.contextPath}/book/all">BOOKS AVAILABLE</a></li></ul>
-						
+						<ul><li><div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+ new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script></li></ul>
 					<div class="clearfix"> </div>
 				</div>
 				<div class="clearfix"> </div>	

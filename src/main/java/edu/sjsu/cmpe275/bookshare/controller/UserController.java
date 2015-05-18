@@ -1,9 +1,9 @@
 package edu.sjsu.cmpe275.bookshare.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.sjsu.cmpe275.bookshare.dao.UserDao;
-import edu.sjsu.cmpe275.bookshare.daoImpl.BookDaoImpl;
-import edu.sjsu.cmpe275.bookshare.daoImpl.UserDaoImpl;
 import edu.sjsu.cmpe275.bookshare.model.Book;
 import edu.sjsu.cmpe275.bookshare.model.User;
 import edu.sjsu.cmpe275.bookshare.service.BookService;
@@ -30,9 +28,20 @@ public class UserController {
 	@Autowired
 	private MailNotification mailMail;
 
+	private boolean isAuthorized(HttpServletRequest req) {
+		String userInSession = "" + req.getSession().getAttribute("user");
+
+		if ("".equals(userInSession) || "Guest".equals(userInSession)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	@RequestMapping(value = "/register")
-	public ModelAndView newUser(Model modl) {
-		ModelAndView model = new ModelAndView("register");
+	public ModelAndView newUser(Model modl, HttpServletResponse res) {
+		ModelAndView model = null;
+		model = new ModelAndView("register");
 		model.addObject("user", new User());
 		return model;
 	}
@@ -43,7 +52,8 @@ public class UserController {
 	 * userDao.createUserhbm(user); return new ModelAndView("redirect:/"); }
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveUser(@ModelAttribute User user) throws SQLException {
+	public ModelAndView saveUser(@ModelAttribute User user,
+			HttpServletResponse res) {
 		if (userDao.createUserhbm(user) == "success") {
 			mailMail.sendMail(
 					"bookshare275@gmail.com",
@@ -54,6 +64,7 @@ public class UserController {
 			return new ModelAndView("redirect:/");
 		} else {
 			String message = "username exists";
+			res.setStatus(403);
 			return new ModelAndView("redirect:/register", "message", message);
 		}
 	}
@@ -74,7 +85,7 @@ public class UserController {
 
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public ModelAndView logincheck(@ModelAttribute User user,
-			HttpServletRequest req) {
+			HttpServletRequest req, HttpServletResponse res) {
 		System.out.println("login method called");
 		String email = user.getEmail();
 		String password = user.getPassword();
@@ -87,6 +98,7 @@ public class UserController {
 		} else {
 			System.out.println("fail");
 			String message = "Invalid login credentials";
+			res.setStatus(401);
 			return new ModelAndView("redirect:/login", "message", message);
 
 		}
@@ -102,7 +114,9 @@ public class UserController {
 	@RequestMapping(value = "/useraccount")
 	public ModelAndView useraccount(Model modl, HttpServletRequest req) {
 		ModelAndView model = new ModelAndView("userAccount");
-		// model.addObject("user", new User());
+		if (!isAuthorized(req)) {
+			return new ModelAndView("login");
+		}
 		List<Book> myBooks = null;
 		myBooks = bookService.getBooksByUser(""
 				+ req.getSession().getAttribute("user"));

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +27,58 @@ public class UserUpdateController {
 
 	//@Autowired
 	//private UserDaoImpl userDaoImpl;
-
+	private boolean isAuthorized(HttpServletRequest req) {
+		String userInSession = ""+req.getSession().getAttribute("user");
+		
+		if("".equals(userInSession) || "Guest".equals(userInSession)){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user, Model model,
-			HttpServletRequest request) throws SQLException {
+			HttpServletRequest request, HttpServletResponse res) {
 		
 		User updateUser = new User();
 		updateUser.setFirstname(user.getFirstname());
 		updateUser.setLastname(user.getLastname());
 		updateUser.setAddress(user.getAddress());
-		updateUser.setEmail(""+request.getSession().getAttribute("user"));// dummy value(retreive email id
-												// from session variable and set
-												// as users email
-		userDao.updateUserhbm(updateUser);// dummy value
+		updateUser.setEmail(""+request.getSession().getAttribute("user"));
+		
+		if(!isAuthorized(request)) {
+			return new ModelAndView("login");
+		}
+		
+		try {
+			userDao.updateUserhbm(updateUser);
+			res.setStatus(201);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res.setStatus(400);
+		}// dummy value
 
 		return new ModelAndView("redirect:/useraccount");
 	}
 
 	@RequestMapping(value = "/updateuser")
-	public ModelAndView login(Model model, HttpServletRequest req) {
+	public ModelAndView login(Model model, HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView mv = new ModelAndView("UpdateUser");
+		if(!isAuthorized(req)) {
+			return new ModelAndView("login");
+		}
 		try {
 			mv.addObject(
 					"user",
 					userDao.getUserByEmail(""
 							+ req.getSession().getAttribute("user")));
+			res.setStatus(200);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			res.setStatus(404);
 		}
 		// model.addObject("user", new User());
 		return mv;

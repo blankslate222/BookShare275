@@ -3,6 +3,8 @@ package edu.sjsu.cmpe275.bookshare.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class SearchController {
 
 	@RequestMapping(value = "search/title")
 	public ModelAndView searchBookByTitle(@RequestParam("title") String title,
-			Model model) {
+			Model model, HttpServletResponse res) {
 		ModelAndView searchResults = new ModelAndView("SearchResults");
 		List<Book> booksFound = null;
 		try {
@@ -42,6 +44,7 @@ public class SearchController {
 					.getBookByTitle(title);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			res.setStatus(400);
 			e.printStackTrace();
 		}
 		searchResults.addObject("books", booksFound);
@@ -52,13 +55,14 @@ public class SearchController {
 
 	@RequestMapping(value = "search/isbn")
 	public ModelAndView searchBookByIsbn(@RequestParam("isbn") String isbn,
-			Model model) {
+			Model model, HttpServletResponse res) {
 		ModelAndView searchResults = new ModelAndView("SearchResults");
 		Book booksFound = null;
 		try {
 			booksFound = getBookService().getBookDaoImpl().getBookByIsbn(isbn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			res.setStatus(400);
 			e.printStackTrace();
 		}
 		searchResults.addObject("book", booksFound);
@@ -69,7 +73,7 @@ public class SearchController {
 
 	@RequestMapping(value = "search/author")
 	public ModelAndView searchBookByAuthor(
-			@RequestParam("author") String author, Model model) {
+			@RequestParam("author") String author, Model model, HttpServletResponse res) {
 		ModelAndView searchResults = new ModelAndView("SearchResults");
 		List<Book> booksFound = null;
 		try {
@@ -77,6 +81,7 @@ public class SearchController {
 					author);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			res.setStatus(400);
 			e.printStackTrace();
 		}
 		searchResults.addObject("books", booksFound);

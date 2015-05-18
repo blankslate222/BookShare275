@@ -38,19 +38,14 @@ public class BookService {
 		this.listingDaoImpl = listingDaoImpl;
 	}
 
-	public void createBook(Book book) {
-		try {
+	public void createBook(Book book) throws SQLException {
+		
 			System.out.println("in book service");
 
 			getBookDaoImpl().insert(book);
 
 			//getListingDaoImpl().insert(listing);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+	
 	}
 
 	public List<Book> getAvailableBooks() {
@@ -87,13 +82,9 @@ public class BookService {
 		return book;
 	}
 	
-	public void createBookRequest(Book book) {
-		try {
+	public void createBookRequest(Book book) throws SQLException {
+		
 			reqBookDaoImpl.createBookRequest(book);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public List<Book> getRequestedBooks() {

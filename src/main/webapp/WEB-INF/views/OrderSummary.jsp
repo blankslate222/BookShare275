@@ -4,13 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html><head>
-<<<<<<< Updated upstream
+
 <title>Bookshare | Order Summary</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-=======
+
 <title>BOOKSHARE | ORDER SUMMARY</title>
 <link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
->>>>>>> Stashed changes
+
 <!--theme-style-->
 <link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">	
 <link rel="stylesheet" href="css/etalage.css" type="text/css" media="all">

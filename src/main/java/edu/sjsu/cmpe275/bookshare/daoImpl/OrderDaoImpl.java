@@ -176,7 +176,7 @@ System.out.println(sql + user);
 			Connection conn = null;
 			PreparedStatement ps = null;
 			ResultSet data = null;
-			String sql = "select * from orderBook where bookIsbn=?";
+			String sql = "select * from orderBook where bookIsbn=? and rating > 0";
 			conn = getDataSource().getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, isbn);

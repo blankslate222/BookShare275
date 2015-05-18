@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.bookshare.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,19 +43,40 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
+	private boolean isAuthorized(HttpServletRequest req) {
+		String userInSession = ""+req.getSession().getAttribute("user");
+		
+		if("".equals(userInSession) || "Guest".equals(userInSession)){
+			return false;
+		}
+		
+		return true;
+	}
 	@RequestMapping(value = "/accept-offer", method = RequestMethod.POST)
 	public String acceptOffer(@RequestParam("bidId") int bidId,
-		 Model model, HttpServletRequest req) {
+		 Model model, HttpServletRequest req, HttpServletResponse res) {
+		
+		if(!isAuthorized(req)) {
+			return "redirect:/login";
+		}
 		
 		System.out.println("bid id - accepted = " + bidId);
 		Bid bid = bidService.getBidByBidId(bidId);
 		Order order = bidService.acceptOffer(bid);
+		if (bid == null || order == null) {
+			res.setStatus(400);
+		}
 		model.addAttribute("order", order);
 		return "OrderSummary";
 	}
 
 	@RequestMapping(value = "/myoffers")
 	public ModelAndView getOffers(Model model, HttpServletRequest req){
+		
+		if(!isAuthorized(req)) {
+			return new ModelAndView("login");
+		}
+		
 		ModelAndView mv = new ModelAndView("bidList");
 		List<Bid> myBids = bidService.getBid(""+req.getSession().getAttribute("user"));
 		mv.addObject("bids", myBids);
@@ -64,6 +86,11 @@ public class BookController {
 	
 	@RequestMapping(value = "/history/purchase")
 	public String purchaseHistory(Model model, HttpServletRequest req) {
+		
+		if(!isAuthorized(req)) {
+			return "redirect:/login";
+		}
+		
 		String user = ""+req.getSession().getAttribute("user");
 		System.out.println(" user in session " + user);
 		List<Order> purchaseHistory = orderService.getOrdersByBuyer(user);
@@ -74,6 +101,11 @@ public class BookController {
 	
 	@RequestMapping(value = "/history/sales")
 	public String salesHistory(Model model, HttpServletRequest req) {
+		
+		if(!isAuthorized(req)) {
+			return "redirect:/login";
+		}
+		
 		String user = ""+req.getSession().getAttribute("user");
 		System.out.println(" user in session " + user);
 		List<Order> salesHistory = orderService.getOrdersBySeller(user);

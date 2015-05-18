@@ -100,12 +100,14 @@ public class OrderService {
 		}
 		
 		public void updateOrder(Order order) {
-			try {
-				orderDaoImpl.updateOrder(order);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+				try {
+					orderDaoImpl.updateOrder(order);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
 		}
 		
 		public List<Order> getOrdersBySeller(String seller) {
