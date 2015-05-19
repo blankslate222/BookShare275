@@ -16,10 +16,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
-
+<aop:aspectj-autoproxy /> 
 	<context:component-scan base-package="package edu.sjsu.cmpe275.bookshare.controller" />
 	<mvc:annotation-driven />
-	<aop:aspectj-autoproxy /> 
+	<bean id="aspectLog" class="edu.sjsu.cmpe275.bookshare.aspect.SessionLog"></bean>
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	<property name="host" value="smtp.gmail.com" />
 	<property name="port" value="587" />
@@ -64,6 +65,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd
 	<bean id="listingDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.ListingDaoImpl"></bean>
 	<bean id="orderDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.OrderDaoImpl"></bean>
 	<bean id="reqBookDaoImpl" class="edu.sjsu.cmpe275.bookshare.daoImpl.RequestBookDaoImpl"></bean>
+	
 	
 	
 	<bean id="dataSource"
