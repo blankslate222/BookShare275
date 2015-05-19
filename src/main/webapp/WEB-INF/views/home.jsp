@@ -1,29 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
+<html>
+<head>
 <title>BOOKSHARE| Home </title>
 <link href="css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<!--theme-style-->
 <link href="css/css/style.css" rel="stylesheet" type="text/css" media="all">	
-<!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-<!--//fonts-->
 <script src="js/js/jquery.min.js"></script>
-
 <meta name="google-translate-customization" content="832e45d6fb214c99-b714140db595e3d8-g484b20115371f2a3-24"></meta>
-
-<!--script-->
 </head>
 <body> 
 <%if(session.getAttribute("user")== null || session.getAttribute("user").equals("Guest") ){%>
 <jsp:forward page="${pageContext.request.contextPath}"></jsp:forward>
 <%	
 } %>
-	<!--header-->
+	
 	<div class="header">
 		
 		<div class="bottom-header">
@@ -52,8 +46,7 @@ function googleTranslateElementInit() {
 			</div>
 		</div>
 	</div>
-	<!---->
-	<!-- start content -->
+	
 	<div class="container">
 		
 	<div class="women-product">
@@ -111,7 +104,7 @@ function googleTranslateElementInit() {
 	</div>
 	<div class="sub-cate">
 				
-				<!--initiate accordion-->
+				
 		<script type="text/javascript">
 			$(function() {
 			    var menu_ul = $('.menu > li > ul'),
@@ -143,7 +136,5 @@ function googleTranslateElementInit() {
 			</div>
 	<div class="clearfix"> </div>
 </div>
-	<!---->
-	
-
-</body></html>
+	</body>
+	</html>

@@ -4,21 +4,14 @@
 <html><head>
 <title>BOOKSHARE | SELL BOOK</title>
 <link href="${pageContext.request.contextPath}/css/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<!--theme-style-->
 <link href="${pageContext.request.contextPath}/css/css/style.css" rel="stylesheet" type="text/css" media="all">	
-<!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-<!--//fonts-->
 <script src="${pageContext.request.contextPath}/js/js/jquery.min.js"></script>
-
-
-<!--script-->
 </head>
 <body> 
-	<!--header-->
+
 	<div class="header">
 		
 		<div class="bottom-header">
@@ -43,24 +36,13 @@
 			</div>
 		</div>
 	</div>
-	<!---->
-	<!-- start content -->
-	<div class="container">
-		
-	
-	
-	
+	<div class="container">	
 </div>
-	<!---->
 	
 	<form:form action="${pageContext.request.contextPath}/sell/book" method="post" modelAttribute="book" class="form-horizontal">
 <form:hidden path="id"/>
 <fieldset>
-
-<!-- Form Name -->
 <legend>Share Book</legend>
-
-<!-- Text input-->
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="title">Title</label>  
@@ -69,8 +51,6 @@
     
   </div>
 </div>
-
-<!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="authors">Authors</label>  
   <div class="col-md-5">
@@ -79,7 +59,6 @@
   </div>
 </div>
 
-<!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="isbn">ISBN</label>  
   <div class="col-md-5">
@@ -88,7 +67,6 @@
   </div>
 </div>
 
-<!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="condition">Condition</label>
   <div class="col-md-4">
@@ -111,8 +89,6 @@
   </div>
 </div>
 
-
-<!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="description">Description</label>
   <div class="col-md-4">                     
@@ -120,7 +96,6 @@
   </div>
 </div>
 
-<!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="price">Price ($)</label>  
   <div class="col-md-4">
@@ -129,7 +104,6 @@
   </div>
 </div>
 
-<!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-8">
@@ -140,7 +114,5 @@
 
 </fieldset>
 </form:form>
-
-	
-
-</body></html>
+</body>
+</html>
