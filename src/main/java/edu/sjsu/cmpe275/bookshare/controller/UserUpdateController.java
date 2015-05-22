@@ -27,8 +27,8 @@ public class UserUpdateController {
 
 	//@Autowired
 	//private UserDaoImpl userDaoImpl;
-	private boolean isAuthorized(HttpServletRequest req) {
-		String userInSession = ""+req.getSession().getAttribute("user");
+	private boolean isAuthorized(String user) {
+		String userInSession = user;
 		
 		if("".equals(userInSession) || "Guest".equals(userInSession)){
 			return false;
@@ -47,8 +47,8 @@ public class UserUpdateController {
 		updateUser.setAddress(user.getAddress());
 		updateUser.setEmail(""+request.getSession().getAttribute("user"));
 		
-		if(!isAuthorized(request)) {
-			return new ModelAndView("login");
+		if(!isAuthorized((String)request.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		
 		try {
@@ -66,8 +66,8 @@ public class UserUpdateController {
 	@RequestMapping(value = "/updateuser")
 	public ModelAndView login(Model model, HttpServletRequest req, HttpServletResponse res) {
 		ModelAndView mv = new ModelAndView("UpdateUser");
-		if(!isAuthorized(req)) {
-			return new ModelAndView("login");
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		try {
 			mv.addObject(

@@ -43,8 +43,8 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-	private boolean isAuthorized(HttpServletRequest req) {
-		String userInSession = ""+req.getSession().getAttribute("user");
+	private boolean isAuthorized(String user) {
+		String userInSession = user;
 		
 		if("".equals(userInSession) || "Guest".equals(userInSession)){
 			return false;
@@ -56,7 +56,7 @@ public class BookController {
 	public String acceptOffer(@RequestParam("bidId") int bidId,
 		 Model model, HttpServletRequest req, HttpServletResponse res) {
 		
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		
@@ -73,8 +73,8 @@ public class BookController {
 	@RequestMapping(value = "/myoffers")
 	public ModelAndView getOffers(Model model, HttpServletRequest req){
 		
-		if(!isAuthorized(req)) {
-			return new ModelAndView("login");
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		
 		ModelAndView mv = new ModelAndView("bidList");
@@ -87,7 +87,7 @@ public class BookController {
 	@RequestMapping(value = "/history/purchase")
 	public String purchaseHistory(Model model, HttpServletRequest req) {
 		
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		
@@ -102,7 +102,7 @@ public class BookController {
 	@RequestMapping(value = "/history/sales")
 	public String salesHistory(Model model, HttpServletRequest req) {
 		
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		

@@ -33,8 +33,8 @@ public class TransactionsController {
 	@Autowired
 	private BidService bidService;
 
-	private boolean isAuthorized(HttpServletRequest req) {
-		String userInSession = "" + req.getSession().getAttribute("user");
+	private boolean isAuthorized(String user) {
+		String userInSession = user;
 
 		if ("".equals(userInSession) || "Guest".equals(userInSession)) {
 			return false;
@@ -45,8 +45,8 @@ public class TransactionsController {
 
 	@RequestMapping(value = "sell/book")
 	public ModelAndView sellBook(Model modl, HttpServletRequest req) {
-		if (!isAuthorized(req)) {
-			return new ModelAndView("login");
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		ModelAndView model = new ModelAndView("SellBook");
 		model.addObject("book", new Book());
@@ -58,7 +58,7 @@ public class TransactionsController {
 			BindingResult result, Model model, HttpServletRequest req,
 			HttpServletResponse res) {
 
-		if (!isAuthorized(req)) {
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 
@@ -76,8 +76,8 @@ public class TransactionsController {
 
 	@RequestMapping(value = "book/request")
 	public ModelAndView requestBook(Model modl, HttpServletRequest req) {
-		if (!isAuthorized(req)) {
-			return new ModelAndView("login");
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		ModelAndView model = new ModelAndView("RequestBook");
 		model.addObject("book", new Book());
@@ -89,7 +89,7 @@ public class TransactionsController {
 			BindingResult result, Model model, HttpServletRequest req,
 			HttpServletResponse res) {
 
-		if (!isAuthorized(req)) {
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 
@@ -109,7 +109,7 @@ public class TransactionsController {
 			BindingResult result, Model model, HttpServletRequest req,
 			HttpServletResponse res) {
 
-		if (!isAuthorized(req)) {
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 
@@ -129,7 +129,7 @@ public class TransactionsController {
 			@ModelAttribute("book") Book book, BindingResult result,
 			Model model, HttpServletRequest req, HttpServletResponse res) {
 
-		if (!isAuthorized(req)) {
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 
@@ -183,7 +183,7 @@ public class TransactionsController {
 	@RequestMapping(value = "/update-feedback/{id}")
 	public String feedBackForm(@PathVariable("id") String orderId, Model model,
 			HttpServletRequest req, HttpServletResponse res) {
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		if ("".equals(orderId)) {
@@ -205,7 +205,7 @@ public class TransactionsController {
 	public String updateFeedback(@ModelAttribute("order") Order order,
 			BindingResult result, Model model, HttpServletRequest req) {
 		
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		
@@ -231,7 +231,7 @@ public class TransactionsController {
 	public String fulfillRequest(@PathVariable("id") int id, Model model,
 			HttpServletResponse res, HttpServletRequest req) {
 		
-		if(!isAuthorized(req)) {
+		if(!isAuthorized((String)req.getSession().getAttribute("user"))) {
 			return "redirect:/login";
 		}
 		

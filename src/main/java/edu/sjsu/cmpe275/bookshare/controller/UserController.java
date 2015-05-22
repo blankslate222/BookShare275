@@ -28,8 +28,8 @@ public class UserController {
 	@Autowired
 	private MailNotification mailMail;
 
-	private boolean isAuthorized(HttpServletRequest req) {
-		String userInSession = "" + req.getSession().getAttribute("user");
+	private boolean isAuthorized(String user) {
+		String userInSession = user;
 
 		if ("".equals(userInSession) || "Guest".equals(userInSession)) {
 			return false;
@@ -114,8 +114,8 @@ public class UserController {
 	@RequestMapping(value = "/useraccount")
 	public ModelAndView useraccount(Model modl, HttpServletRequest req) {
 		ModelAndView model = new ModelAndView("userAccount");
-		if (!isAuthorized(req)) {
-			return new ModelAndView("login");
+		if (!isAuthorized((String)req.getSession().getAttribute("user"))) {
+			return new ModelAndView("redirect:/login");
 		}
 		List<Book> myBooks = null;
 		myBooks = bookService.getBooksByUser(""
